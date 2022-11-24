@@ -4,7 +4,7 @@ const API_URL="http://localhost:5005/"
 
 function Signup() {
   // States for registration
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -17,7 +17,7 @@ function Signup() {
 
   // Handling the name change
   const handleName = (e) => {
-    setName(e.target.value);
+    setUsername(e.target.value);
     setSubmitted(false);
   };
 
@@ -36,11 +36,11 @@ function Signup() {
   // Handling the form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("yes")
-    const response = await fetch('http://localhost:5005/auth/signup', {
-      method: 'POST',
+    console.log("yes");
+    const response = await fetch("http://localhost:5005/auth/signup", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ name, password, email }),
     })
@@ -49,13 +49,7 @@ function Signup() {
     })
     const parsed = await response.json()
 
-    // if (parsed.status === 200) {
-    //   setToken(parsed.token)
-    // } else {
-    //   setError(parsed)
-    // }
-
-    if (name === "" || email === "" || password === "") {
+    if (username === "" || email === "" || password === "") {
       setError(true);
     } else {
       setSubmitted(true);
@@ -72,7 +66,7 @@ function Signup() {
           display: submitted ? "" : "none",
         }}
       >
-        <h1>User {name} successfully registered!!</h1>
+        <h1>User {username} successfully registered!!</h1>
       </div>
     );
   };
@@ -108,7 +102,7 @@ function Signup() {
         <input
           onChange={handleName}
           className="input"
-          value={name}
+          value={username}
           type="text"
         />
 

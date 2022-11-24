@@ -4,26 +4,26 @@ import { SessionContext } from "../contexts/SessionContext";
 import axios from "axios";
 
 const LoginPage = () => {
-  /* const { setToken } = useContext(SessionContext); */
-
+  const { setToken } = useContext(SessionContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     const response = await axios.post("http://localhost:5005/auth/login", {
       username,
       password,
     });
     console.log(response.data);
-    /* 
+
+    const parsed = response.data;
+
     if (parsed.status === 200) {
       setToken(parsed.token);
     } else {
       setError(parsed);
-    } */
+    }
   };
 
   return (

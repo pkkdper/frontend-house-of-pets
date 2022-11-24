@@ -29,8 +29,24 @@ function Signup() {
   };
 
   // Handling the form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("yes")
+    const response = await fetch('http://localhost:5005/auth/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, password, email }),
+    })
+    const parsed = await response.json()
+
+    // if (parsed.status === 200) {
+    //   setToken(parsed.token)
+    // } else {
+    //   setError(parsed)
+    // }
+
     if (name === "" || email === "" || password === "") {
       setError(true);
     } else {
@@ -52,7 +68,6 @@ function Signup() {
       </div>
     );
   };
-
   // Showing error message if error is true
   const errorMessage = () => {
     return (

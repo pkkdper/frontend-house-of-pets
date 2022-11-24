@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+const API_URL="http://localhost:5005/"
 
 function Signup() {
   // States for registration
@@ -9,6 +11,9 @@ function Signup() {
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+
+
+  const navigate = useNavigate();
 
   // Handling the name change
   const handleName = (e) => {
@@ -38,6 +43,9 @@ function Signup() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ name, password, email }),
+    })
+    .then((response) => {
+      navigate('/profile');
     })
     const parsed = await response.json()
 

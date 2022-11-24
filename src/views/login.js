@@ -1,6 +1,7 @@
 import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { useContext, useState } from "react";
 import { SessionContext } from "../contexts/SessionContext";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginPage = () => {
@@ -8,6 +9,7 @@ const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -16,6 +18,13 @@ const LoginPage = () => {
       password,
     });
     console.log(response.data);
+
+    if (response) {
+      navigate("/profile");
+    } else {
+      const errorDescription = error.response.data.message;
+      setError(errorDescription);
+    }
 
     const parsed = response.data;
 

@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   // States for registration
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
@@ -40,7 +42,7 @@ function Signup() {
       body: JSON.stringify({ username, password, email }),
     });
     const parsed = await response.json();
-
+    navigate("/profile");
     if (username === "" || email === "" || password === "") {
       setError(true);
     } else {

@@ -8,22 +8,20 @@ function Navbar() {
   const { isLoggedIn, user } = useContext(AuthContext);
   return (
     <nav>
-      <u>
-        <Link to="/">Home</Link>
-        <img src={HomeImage} alt="navbar-home" />
-        {isLoggedIn && (
-          <>
-            <Link to="/auth/profile"> Profile</Link>
-            <button>Logout</button>
-          </>
-        )}
-        {!isLoggedIn && (
-          <>
-            <Link to="/auth/signup"> Sign Up </Link>
-            <Link to="/auth/login"> Login </Link>
-          </>
-        )}
-      </u>
+      <Link to="/">Home</Link>
+      <img src={HomeImage} alt="navbar-home" />
+      {isLoggedIn && (
+        <>
+          <Link to="/auth/profile"> Profile</Link>
+          <button>Logout</button>
+        </>
+      )}
+      {!isLoggedIn && (
+        <>
+          <Link to="/auth/signup"> Sign Up </Link>
+          <Link to="/auth/login"> Login </Link>
+        </>
+      )}
     </nav>
   );
 }

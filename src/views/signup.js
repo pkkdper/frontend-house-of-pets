@@ -42,13 +42,18 @@ function Signup() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password, email }),
+<<<<<<<<< Temporary merge branch 1
+      body: JSON.stringify({ name, password, email }),
     })
-      const parsed = await response.json()
-      console.log(parsed)
-      navigate('/auth/login');
-    
-
+    .then((response) => {
+      navigate('/profile');
+    })
+    const parsed = await response.json()
+=========
+      body: JSON.stringify({ username, password, email }),
+    });
+    const parsed = await response.json();
+>>>>>>>>> Temporary merge branch 2
 
     if (username === "" || email === "" || password === "") {
       setError(true);

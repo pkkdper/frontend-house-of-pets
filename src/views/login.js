@@ -1,12 +1,13 @@
 import { Button, PasswordInput, TextInput } from "@mantine/core";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { SessionContext } from "../contexts/SessionContext";
+import { AuthContext } from "../contexts/auth.context";
 import axios from "axios";
-
+import Navbar from "../components/Navbar";
 const API_URL="http://localhost:5005/"
-const LoginPage = () => {
-  const { setToken } = useContext(SessionContext);
+const LoginPage = (props) => {
+  const navigate = useNavigate()
+  const { storeToken } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
@@ -16,19 +17,24 @@ const LoginPage = () => {
     const response = await axios.post("http://localhost:5005/auth/login", {
       username,
       password,
+    })
+    await((response)=> {
+      console.log(response.data.authToken)
+      // navigate("/auth/profile")
     });
     console.log(response.data);
 
     const parsed = response.data;
-
-    if (parsed.status === 200) {
-      setToken(parsed.token);
-    } else {
-      setError(parsed);
-    }
+    navigate('/auth/profile');
+    // if (parsed.status === 200) {
+    //   setToken(parsed.token);
+    // } else {
+    //   setError(parsed);
+    // }
   };
 
-  return (
+  return (<>
+  <Navbar/>
     <form onSubmit={handleSubmit}>
       {error?.message && <p>{error.message}</p>}
       <TextInput
@@ -53,7 +59,7 @@ const LoginPage = () => {
         Login
       </Button>
     </form>
-  );
+  </>);
 };
 
 export default LoginPage;

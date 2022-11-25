@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";import Navbar from "../components/Navbar";
 const API_URL="http://localhost:5005/"
 
 function Signup() {
@@ -42,12 +42,13 @@ function Signup() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name, password, email }),
+      body: JSON.stringify({ username, password, email }),
     })
-    .then((response) => {
-      navigate('/profile');
-    })
-    const parsed = await response.json()
+      const parsed = await response.json()
+      console.log(parsed)
+      navigate('/auth/login');
+    
+
 
     if (username === "" || email === "" || password === "") {
       setError(true);
@@ -85,6 +86,7 @@ function Signup() {
   };
 
   return (
+    <><Navbar/>
     <div className="form">
       <div>
         <h1>User Registration</h1>
@@ -126,7 +128,7 @@ function Signup() {
           Submit
         </button>
       </form>
-    </div>
+    </div></>
   );
 }
 

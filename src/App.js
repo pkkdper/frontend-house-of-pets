@@ -5,22 +5,22 @@ import Login from "./views/login";
 import Signup from "./views/signup";
 import Profile from "./views/profile";
 import { useContext } from "react";
-import { SessionContext } from "./contexts/SessionContext";
+import { AuthContext } from "./contexts/auth.context";
 
 function App() {
-  const { isAuthenticated } = useContext(SessionContext);
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <div className="App">
-      {isAuthenticated ? (
+      {/* {isAuthenticated ? (
         <NavLink to="/profile">Profile</NavLink>
       ) : (
         <NavLink to="/login">Login</NavLink>
-      )}
+      )} */}
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/auth/login" element={<Login />} />
+        <Route path="/auth/signup" element={<Signup />} />
+        <Route path="/auth/profile" element={<Profile />} />
       </Routes>
     </div>
   );

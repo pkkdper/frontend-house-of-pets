@@ -7,35 +7,46 @@ import Navbar from "../components/Navbar";
 const API_URL="http://localhost:5005/"
 const LoginPage = (props) => {
   const navigate = useNavigate()
-  const { storeToken } = useContext(AuthContext);
+  // const { storeToken } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
+const { storeToken, authenticateUser } = useContext(AuthContext);
+const [errorMessage, setErrorMessage] = useState(undefined);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios.post("http://localhost:5005/auth/login", {
+    axios.post("http://localhost:5005/auth/login", {
       username,
       password,
+    }).then((response) => {
+    storeToken(response.data.token)
+ authenticateUser();  
+    const parsed = response.data;
+    console.log(parsed)
+    navigate('/');
     })
-    await((response)=> {
-      console.log(response.data.authToken)
-    });
 
+    // await((response)=> {
+    //   console.log(response.data.authToken)
+    // });
+/* 
     if (response) {
-      navigate("/auth/profile");
+      navigate("/auth/profile:id");
     } else {
       const errorDescription = error.response.data.message;
       setError(errorDescription);
-    }
-
-    const parsed = response.data;
-    navigate('/auth/profile');
-    // if (parsed.status === 200) {
-    //   setToken(parsed.token);
-    // } else {
-    //   setError(parsed);
-    // }
+    } */
+   
+/*      if (parsed.status === 200) {
+       setToken(parsed.token);
+     } else {
+      setError(parsed);
+     } */
+     .catch((error) => {
+      const errorDescription = error.response.data.message;
+      setErrorMessage(errorDescription);
+    })
   };
 
   return (<>

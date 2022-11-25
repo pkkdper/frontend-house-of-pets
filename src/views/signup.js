@@ -7,13 +7,12 @@ function Signup() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
-
-  const navigate = useNavigate();
 
   // Handling the name change
   const handleName = (e) => {

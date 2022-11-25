@@ -8,9 +8,12 @@ const API_URL="http://localhost:5005/"
 const LoginPage = (props) => {
   const navigate = useNavigate()
   const { storeToken } = useContext(AuthContext);
+const LoginPage = () => {
+  const { setToken } = useContext(SessionContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,9 +23,15 @@ const LoginPage = (props) => {
     })
     await((response)=> {
       console.log(response.data.authToken)
-      // navigate("/auth/profile")
     });
     console.log(response.data);
+
+    if (response) {
+      navigate("/auth/profile");
+    } else {
+      const errorDescription = error.response.data.message;
+      setError(errorDescription);
+    }
 
     const parsed = response.data;
     navigate('/auth/profile');
@@ -60,6 +69,6 @@ const LoginPage = (props) => {
       </Button>
     </form>
   </>);
-};
+};}
 
 export default LoginPage;

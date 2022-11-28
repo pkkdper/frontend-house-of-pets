@@ -14,6 +14,7 @@ function Profile(props) {
   const [changedSurname, setChangedSurname] = useState("");
   const [changedName, setChangedName] = useState("");
   const [changedAge, setChangedAge] = useState("");
+  const [changedLocation, setChangedLocation] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -67,6 +68,9 @@ function Profile(props) {
           name: changedName,
           email: changedEmail,
           username: changedUsername,
+          location: changedLocation,
+          age: changedAge,
+          surname: changedSurname
         }),
       });
     const parsed = result.json()
@@ -88,27 +92,21 @@ function Profile(props) {
           Username:
           <input type="text" defaultValue={profileUser.username} onChange={(e) => setChangedUsername(e.target.value)} name="username"/>
         </label>
-        {/* <label>
-          Password:
-          <input type="password" value={profileUser.password} />
-        </label> */}
         <label>
           Name:
-          <input
-            type="text" placeholder="add your name" name="name"
-          />
+          <input type="text" placeholder="add your name" name="name" onChange={(e) => setChangedName(e.target.value)} defaultValue={profileUser.name}/>
         </label>
         <label>
           Surname:
-          <input type="text" placeholder="add your surname" name="surname"/>
+          <input type="text" placeholder="add your surname" name="surname" onChange={(e) => setChangedSurname(e.target.value)} defaultValue={profileUser.surname}/>
         </label>
         <label>
           Location:
-          <input type="text" placeholder="pick location on the map" name="lovation"/>
+          <input type="text" placeholder="add your location" name="location" onChange={(e) => setChangedLocation(e.target.value)} defaultValue={profileUser.location}/>
         </label>
         <label>
           Age:
-          <input type="number" placeholder="add age" name="age"/>
+          <input type="number" placeholder="add age" name="age" onChange={(e) => setChangedAge(e.target.value)} defaultValue={profileUser.age}/>
         </label>
         <label>
           Picture:
@@ -116,10 +114,7 @@ function Profile(props) {
         </label>
         <label>
           Animals:
-          <input
-            type="text"
-            placeholder="add animals to your profile in animals page"
-          />
+          <input type="text" placeholder="add animals to your profile in animals page"/>
           <Link to="/auth/animal">
             <button>Add animal</button>
           </Link>

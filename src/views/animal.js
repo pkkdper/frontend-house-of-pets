@@ -104,6 +104,7 @@ const Animal = (props) => {
                 <label>
                     Picture:
                 </label>
+                <input id="picture" type="file" value={picture} onChange={handlePictureChange} />
                 <input type="picture" value={picture} onChange={handlePictureChange} />
                 <button onClick={handleSubmit} className="btn" type="submit">
                     Submit

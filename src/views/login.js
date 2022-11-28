@@ -25,7 +25,7 @@ const LoginPage = (props) => {
         authenticateUser();
         const parsed = response.data;
         console.log(parsed);
-        navigate("/auth/profile");
+        navigate("/auth/main");
       })
       // await((response)=> {
       //   console.log(response.data.authToken)

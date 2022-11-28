@@ -3,17 +3,27 @@ import { Link } from "react-router-dom";
 import HomeImage from "../assets/home.png";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/auth.context";
 
 function Navbar() {
-  const { isLoggedIn, user } = useContext(AuthContext);
+  const { isLoggedIn, user, removeToken } = useContext(AuthContext);
   return (
     <nav>
-      <Link to="/">Home</Link>
+      <Link to="/">
+        <button>Home</button>
+      </Link>
       <img src={HomeImage} alt="navbar-home" />
       {isLoggedIn && (
         <>
-          <Link to="/auth/profile"> Profile</Link>
-          <button>Logout</button>
+          <Link to="/auth/profile">
+            <button>Profile</button>
+          </Link>
+          <Link to="/auth/animal">
+            <button>Add animal</button>
+          </Link>
+
+          <button onClick={() => removeToken()}>Logout</button>
         </>
       )}
       {!isLoggedIn && (

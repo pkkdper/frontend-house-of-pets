@@ -8,6 +8,10 @@ const API_URL = "http://localhost:5005/";
 
 const LoginPage = (props) => {
   const navigate = useNavigate();
+const API_URL = "http://localhost:5005/"
+
+const LoginPage = (props) => {
+  const navigate = useNavigate()
   const { storeToken } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +22,9 @@ const LoginPage = (props) => {
     const response = await axios.post("http://localhost:5005/auth/login", {
       username,
       password,
+    });
+    await ((response) => {
+      console.log(response.data.authToken);
     });
     await ((response) => {
       console.log(response.data.authToken);
@@ -33,11 +40,11 @@ const LoginPage = (props) => {
 
     const parsed = response.data;
     navigate("/auth/profile");
-    /*  if (parsed.status === 200) {
-      setToken(parsed.token);
+    if (parsed.status === 200) {
+      storeToken(parsed.token);
     } else {
       setError(parsed);
-    } */
+    }
   };
 
   return (
@@ -69,6 +76,33 @@ const LoginPage = (props) => {
       </form>
     </>
   );
+  return (<>
+    <Navbar />
+    <form onSubmit={handleSubmit}>
+      {error?.message && <p>{error.message}</p>}
+      <TextInput
+        label="Username"
+        variant="filled"
+        size="md"
+        withAsterisk
+        value={username}
+        onChange={(event) => setUsername(event.target.value)}
+        required
+      />
+      <PasswordInput
+        label="Password"
+        variant="filled"
+        size="md"
+        withAsterisk
+        value={password}
+        onChange={(event) => setPassword(event.target.value)}
+        required
+      />
+      <Button type="submit" variant="light" color="cyan" size="md" uppercase>
+        Login
+      </Button>
+    </form>
+  </>);
 };
 
 export default LoginPage;

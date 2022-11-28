@@ -24,6 +24,7 @@ export default function App() {
   return (
     <div className="App">
       <div style={{ margin: "0 auto", marginTop: "10%" }}>
+        <Navbar />
         <label>Search:</label>
         <input
           type="text"

@@ -5,48 +5,48 @@ import { AuthContext } from "../contexts/auth.context";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 const API_URL = "http://localhost:5005/";
-
 const LoginPage = (props) => {
   const navigate = useNavigate();
-const API_URL = "http://localhost:5005/"
-
-const LoginPage = (props) => {
-  const navigate = useNavigate()
-  const { storeToken } = useContext(AuthContext);
+  // const { storeToken } = useContext(AuthContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState();
-
+  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState(undefined);
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const response = await axios.post("http://localhost:5005/auth/login", {
-      username,
-      password,
-    });
-    await ((response) => {
-      console.log(response.data.authToken);
-    });
-    await ((response) => {
-      console.log(response.data.authToken);
-    });
-    console.log(response.data);
-
+    axios
+      .post("http://localhost:5005/auth/login", {
+        username,
+        password,
+      })
+      .then((response) => {
+        storeToken(response.data.token);
+        authenticateUser();
+        const parsed = response.data;
+        console.log(parsed);
+        navigate("/auth/profile");
+      })
+      // await((response)=> {
+      //   console.log(response.data.authToken)
+      // });
+      /*
     if (response) {
-      navigate("/auth/profile");
+      navigate("/auth/profile:id");
     } else {
       const errorDescription = error.response.data.message;
       setError(errorDescription);
-    }
-
-    const parsed = response.data;
-    navigate("/auth/profile");
-    if (parsed.status === 200) {
-      storeToken(parsed.token);
-    } else {
+    } */
+      /*      if (parsed.status === 200) {
+       setToken(parsed.token);
+     } else {
       setError(parsed);
-    }
+     } */
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
   };
-
   return (
     <>
       <Navbar />
@@ -76,33 +76,5 @@ const LoginPage = (props) => {
       </form>
     </>
   );
-  return (<>
-    <Navbar />
-    <form onSubmit={handleSubmit}>
-      {error?.message && <p>{error.message}</p>}
-      <TextInput
-        label="Username"
-        variant="filled"
-        size="md"
-        withAsterisk
-        value={username}
-        onChange={(event) => setUsername(event.target.value)}
-        required
-      />
-      <PasswordInput
-        label="Password"
-        variant="filled"
-        size="md"
-        withAsterisk
-        value={password}
-        onChange={(event) => setPassword(event.target.value)}
-        required
-      />
-      <Button type="submit" variant="light" color="cyan" size="md" uppercase>
-        Login
-      </Button>
-    </form>
-  </>);
 };
-
 export default LoginPage;

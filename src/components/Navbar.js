@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import HomeImage from "../assets/home.png";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
-import { useContext } from "react";
-import { AuthContext } from "../contexts/auth.context";
 
 function Navbar() {
   const { isLoggedIn, user, removeToken } = useContext(AuthContext);

@@ -35,9 +35,25 @@ export default function App() {
             if (item.name.toLowerCase().includes(search.toLowerCase())) {
               return item;
             }
+            if (item.location.toLowerCase().includes(search.toLowerCase())) {
+              return item;
+            }
+            if (item.pricepernight === search) {
+              return item;
+            }
+            if (item.photo === search) {
+              return item;
+            }
           })
           .map((item) => (
-            <li key={item.name}>{item.name}</li>
+            <li key={item._id}>
+              <p>{item.name}</p>
+              <p>Location: {item.location}</p>
+              <p>Price per night: {item.pricepernight}</p>
+              <p>
+                Picture: <img src={item.photo} />
+              </p>
+            </li>
           ))}
       </div>
     </div>

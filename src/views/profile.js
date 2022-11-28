@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-
 import { AuthContext } from "../contexts/auth.context";
 function Profile(props) {
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ function Profile(props) {
             console.log("Response from API is: ", response.data);
             setProfileUser(response.data);
           })
-
           .catch((err) => console.log(err));
       };
       getUsers();
@@ -27,11 +25,9 @@ function Profile(props) {
   }, [user]);
   /*  console.log('userId', userId); */
   // const [userPage, setUserPage] = useState([]);
-
   /*   const foundUser = getUsers.find((oneUser) => {   //  <== ADD
     return oneUser._id === userId;
   }); */
-
   /* useEffect(() => {
     const verifyUser = async () => {
       const storedToken = localStorage.getItem("authToken");
@@ -42,19 +38,16 @@ function Profile(props) {
     };
     verifyUser();
   }, []); */
-
   const setData = (data) => {
     console.log(data);
   };
   if (!profileUser) {
     return <p>Loading</p>;
   }
-
   return (
     <div className="App">
       <Navbar />
       <h1>Hello {profileUser.username}</h1>
-
       <form>
         <label>
           Email:
@@ -111,5 +104,4 @@ function Profile(props) {
     </div>
   );
 }
-
 export default Profile;

@@ -47,7 +47,6 @@ const navigate = useNavigate()
       setIsLoggedIn(false);
       setIsLoading(false);
       setUser(null);
-      navigate('/login')
     }
   };
 

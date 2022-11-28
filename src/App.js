@@ -1,5 +1,6 @@
 import "./App.css";
 import { NavLink, Route, Routes } from "react-router-dom";
+import Animal from "./views/animal";
 import Home from "./views/home";
 import Login from "./views/login";
 import Signup from "./views/signup";
@@ -11,16 +12,12 @@ function App() {
   const { isAuthenticated } = useContext(AuthContext);
   return (
     <div className="App">
-      {/* {isAuthenticated ? (
-        <NavLink to="/profile">Profile</NavLink>
-      ) : (
-        <NavLink to="/login">Login</NavLink>
-      )} */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/profile" element={<Profile />} />
+        <Route path="/auth/animal" element={<Animal />} />
       </Routes>
     </div>
   );

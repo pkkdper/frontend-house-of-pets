@@ -18,7 +18,7 @@ function Profile() {
   return (
     <div className="App">
       <Navbar />
-      <h1>Hello</h1>
+      <h1>Welcome to House of Pets</h1>
     </div>
   );
 }

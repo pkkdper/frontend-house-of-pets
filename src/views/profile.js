@@ -9,11 +9,11 @@ function Profile(props) {
   const navigate = useNavigate();
   const [profileUser, setProfileUser] = useState(null);
   const { user } = useContext(AuthContext);  
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [surname, setSurname] = useState("");
-  const [name, setName] = useState("");
-  const [age, setAge] = useState("");
+  const [changedUsername, setChangedUsername] = useState("");
+  const [changedEmail, setChangedEmail] = useState("");
+  const [changedSurname, setChangedSurname] = useState("");
+  const [changedName, setChangedName] = useState("");
+  const [changedAge, setChangedAge] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -45,31 +45,48 @@ function Profile(props) {
     };
     verifyUser();
   }, []); */
-  const setData = (data) => {
-    console.log(data);
-  };
+  // const setData = (data) => {
+  //   console.log(data);
+  // };
   if (!profileUser) {
     return <p>Loading</p>;
   }
 
 
-  function onSubmit() {
-    console.log("ok")
-  }
+  const handleSubmit = async (event) => {
+      event.preventDefault();
+      const id = user.payload.userCopy._id;
+      // const userInfo = user.payload.userCopy;
+
+      const result = await fetch(`http://localhost:5005/auth/profile/${id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: changedName,
+          email: changedEmail,
+          username: changedUsername,
+        }),
+      });
+    const parsed = result.json()
+    // navigate("/")
+  };
+  
 
   return (
     <div className="App">
       <Navbar />
       <h1>Hello {profileUser.username}</h1>
 
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <label>
           Email:
-          <input type="email" value={profileUser.email} onChange={(e) => setEmail(e.target.value)}name="email" />
+          <input type="email" defaultValue={profileUser.email} onChange={(e) => setChangedEmail(e.target.value)}name="email" />
         </label>
         <label>
           Username:
-          <input type="text" value={profileUser.username} onChange={(e) => setUsername(e.target.value)} name="username"/>
+          <input type="text" defaultValue={profileUser.username} onChange={(e) => setChangedUsername(e.target.value)} name="username"/>
         </label>
         {/* <label>
           Password:
@@ -111,10 +128,10 @@ function Profile(props) {
           Houses:
           <input type="text" placeholder="to see any houses rent them" />
         </label>
-        <button onClick={(data) => setData()}>Update</button>
+        <button type="submit">Update</button>
       </form>
     </div>
   );
-}
+      }
 
 export default Profile;

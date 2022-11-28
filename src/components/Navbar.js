@@ -5,15 +5,15 @@ import { useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
 
 function Navbar() {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext); 
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   return (
     <nav>
       <Link to="/"><button>Home</button></Link><img src={HomeImage} alt="navbar-home" />
       {isLoggedIn && (<>
-          <Link to={`/auth/profile`}> profile
-          </Link>        
-          <button onClick={logOutUser}>Logout</button>
-        </>
+        <Link to={`/auth/profile`}> profile
+        </Link>
+        <button onClick={logOutUser}>Logout</button>
+      </>
       )}
       {!isLoggedIn && (
         <>

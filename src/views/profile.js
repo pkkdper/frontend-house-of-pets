@@ -18,6 +18,7 @@ function Profile(props) {
             console.log("Response from API is: ", response.data);
             setProfileUser(response.data);
           })
+
           .catch((err) => console.log(err));
       };
       getUsers();
@@ -44,10 +45,12 @@ function Profile(props) {
   if (!profileUser) {
     return <p>Loading</p>;
   }
+
   return (
     <div className="App">
       <Navbar />
       <h1>Hello {profileUser.username}</h1>
+
       <form>
         <label>
           Email:
@@ -104,4 +107,5 @@ function Profile(props) {
     </div>
   );
 }
+
 export default Profile;

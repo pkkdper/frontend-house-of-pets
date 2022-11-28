@@ -1,35 +1,36 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
-function Profile(props) {
-
-  const getUsers = id => {
+import { useEffect, useState, useContext } from "react";
+import { Link, useParams , useNavigate} from "react-router-dom";
+import Parse from 'parse/dist/parse.min.js';
+import {AuthContext} from "../contexts/auth.context"
+function Profile(props) {const navigate = useNavigate();
+  const [profileUser, setProfileUser] = useState(null)
+    const {user} = useContext(AuthContext)
+    useEffect(()=> {
+    if (user) {
+    const getUsers = () => {
+    const id = user.payload.userCopy._id
     axios
-      .get(`http://localhost:5005/auth/profile${id}`)
-      .then(response => {
-        console.log('Response from API is: ', response);
-        const users = response.data[0];
-        console.log('a single country details: ', users);
+      .get(`http://localhost:5005/auth/profile/${id}`)
+      .then((response) => {
+        console.log("Response from API is: ", response.data);
+        setProfileUser(response.data)
       })
-      .catch(err => console.log(err));
+      
+      .catch((err) => console.log(err));
   };
-
-
-
-
-  const { userId } = useParams();
- /*  console.log('userId', userId); */
+  getUsers()
+}
+    },[user])
+  /*  console.log('userId', userId); */
   // const [userPage, setUserPage] = useState([]);
 
-/*   const foundUser = getUsers.find((oneUser) => {   //  <== ADD
+  /*   const foundUser = getUsers.find((oneUser) => {   //  <== ADD
     return oneUser._id === userId;
   }); */
 
-
-  
   /* useEffect(() => {
     const verifyUser = async () => {
       const storedToken = localStorage.getItem("authToken");
@@ -41,22 +42,18 @@ function Profile(props) {
     verifyUser();
   }, []); */
 
+  const setData = (data) => {
+    console.log(data);
+};
+if(!profileUser) {
+return <p>Loading</p>}
+
   return (
     <div className="App">
       <Navbar />
-      <h1>Hello</h1>
-
-
- {/*      {foundUser && (
-        <>
-          <h2>{foundUser.name}</h2>
-        </>
-      )} */}
-
-
+      <h1>Hello {profileUser.username}</h1>
 
       <form
-      // onSubmit={this.handleSubmit}
       >
         <label>
           Email:
@@ -72,7 +69,7 @@ function Profile(props) {
         </label>
         <label>
           Name:
-          <input type="text" placeholder="add your name" />
+          <input type="text" placeholder="add your name" value={profileUser.name}/>
         </label>
         <label>
           Surname:
@@ -101,7 +98,7 @@ function Profile(props) {
           Houses:
           <input type="text" placeholder="to see any houses rent them" />
         </label>
-        <button type="submit">Save</button>
+        <button onClick={(data) => setData()}>Update</button>
       </form>
     </div>
   );

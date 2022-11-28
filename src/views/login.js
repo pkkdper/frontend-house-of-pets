@@ -24,7 +24,7 @@ const [errorMessage, setErrorMessage] = useState(undefined);
  authenticateUser();  
     const parsed = response.data;
     console.log(parsed)
-    navigate('/');
+    navigate('/auth/profile');
     })
 
     // await((response)=> {

@@ -34,22 +34,22 @@ function PetsPage() {
 
 
     return (
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <label>
                 Petname:
-                <input type="text" value={this.state.Petname} onChange={this.handleChange} />
+                <input type="text" value={Petname} onChange={handleChange} />
             </label>
             <label>
                 Breed:
-                <input type="text" value={this.state.Breed} onChange={this.handleChange} />
+                <input type="text" value={Breed} onChange={handleChange} />
             </label>
             <label>
                 MedicalConditions:
-                <input type="text" value={this.state.MedicalConditions} onChange={this.handleChange} />
+                <input type="text" value={MedicalConditions} onChange={handleChange} />
             </label>
             <label>
                 Age:
-                <input type="text" value={this.state.Age} onChange={this.handleChange} />
+                <input type="text" value={Age} onChange={handleChange} />
             </label>
             <button type="submit">Create pet profile</button>
         </form>

@@ -10,7 +10,7 @@ function Navbar() {
     <nav>
       <Link to="/">Home</Link><img src={HomeImage} alt="navbar-home" />
       {isLoggedIn && (<>
-          <Link to={`/auth/profile${user._id}`}> profile
+          <Link to={`/auth/profile`}> profile
           </Link>        
           <button onClick={logOutUser}>Logout</button>
         </>

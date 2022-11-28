@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
 import axios from "axios";
 import Navbar from "../components/Navbar";
-const API_URL="http://localhost:5005/"
+const API_URL = "http://localhost:5005/"
+
 const LoginPage = (props) => {
   const navigate = useNavigate()
   // const { storeToken } = useContext(AuthContext);
@@ -26,7 +27,6 @@ const [errorMessage, setErrorMessage] = useState(undefined);
     console.log(parsed)
     navigate('/auth/profile');
     })
-
     // await((response)=> {
     //   console.log(response.data.authToken)
     // });
@@ -50,7 +50,7 @@ const [errorMessage, setErrorMessage] = useState(undefined);
   };
 
   return (<>
-  <Navbar/>
+    <Navbar />
     <form onSubmit={handleSubmit}>
       {error?.message && <p>{error.message}</p>}
       <TextInput

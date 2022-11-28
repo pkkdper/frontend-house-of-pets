@@ -81,5 +81,5 @@ const navigate = useNavigate()
     </AuthContext.Provider>
   );
 }
-
+ 
 export { AuthProviderWrapper, AuthContext };

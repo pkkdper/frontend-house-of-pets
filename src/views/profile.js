@@ -93,6 +93,8 @@ return <p>Loading</p>}
             type="text"
             placeholder="add animals to your profile in animals page"
           />
+                  <Link to="/auth/animal"><button>Add animal</button></Link>
+
         </label>
         <label>
           Houses:

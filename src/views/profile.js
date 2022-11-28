@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { Link, useParams , useNavigate} from "react-router-dom";
-import Parse from 'parse/dist/parse.min.js';
 import {AuthContext} from "../contexts/auth.context"
 function Profile(props) {const navigate = useNavigate();
   const [profileUser, setProfileUser] = useState(null)

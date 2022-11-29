@@ -14,14 +14,20 @@ function Navbar() {
       <img src={HomeImage} alt="navbar-home" />
       {isLoggedIn && (
         <>
-          <Link to={`/auth/profile`}> profile</Link>
+          <Link to={`/auth/profile`}>
+            <button>Profile</button>
+          </Link>
           <button onClick={logOutUser}>Logout</button>
         </>
       )}
       {!isLoggedIn && (
         <>
-          <Link to="/auth/signup"> Sign Up </Link>
-          <Link to="/auth/login"> Login </Link>
+          <Link to="/auth/signup">
+            <button>Sign Up </button>
+          </Link>
+          <Link to="/auth/login">
+            <button>Login</button>
+          </Link>
         </>
       )}
     </nav>

@@ -44,18 +44,38 @@ export default function App() {
             if (item.photo === search) {
               return item;
             }
+            if (item.maxnumberofdays === search) {
+              return item;
+            }
+            if (item.rooms === search) {
+              return item;
+            }
+            if (item.type === search) {
+              return item;
+            }
           })
           .map((item) => (
             <li key={item._id}>
               <p>{item.name}</p>
               <p>Location: {item.location}</p>
               <p>Price per night: {item.pricepernight}</p>
-              <p>
-                Picture: <img src={item.photo} />
-              </p>
+              <p>Max numbers of days: {item.maxnumberofdays}</p>
+              <p>Rooms: {item.rooms}</p>
+              <p>Type: {item.type}</p>
             </li>
           ))}
       </div>
     </div>
   );
 }
+
+/* name: "Beautiful apartment",
+location: "Peru",
+pricepernight: 50,
+maxnumberofdays: 7,
+rooms: 3,
+type: "Apartment",
+animaltype: "Dog",
+maxsizeofanimal: "Big",
+maxnumberofanimals: 3,
+photo: "picture", */

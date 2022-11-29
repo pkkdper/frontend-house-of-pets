@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
+
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../contexts/auth.context';
 
@@ -43,41 +44,42 @@ const {getToken, updateUser} = useContext(AuthContext)
         // }
     };
 
+  // function to update name of the animal
+  const handleChange = (event) => {
+    setName(event.target.value);
+  };
 
-    // function to update name of the animal
-    const handleChange = (event) => {
-        setName(event.target.value);
-    }
+  // function to update type of the animal
+  const handleTypeChange = (event) => {
+    setType(event.target.value);
+  };
 
-    // function to update type of the animal
-    const handleTypeChange = (event) => {
-        setType(event.target.value);
-    }
+  // function to update size of the animal
+  const handleSizeChange = (event) => {
+    setSize(event.target.value);
+  };
 
-    // function to update size of the animal
-    const handleSizeChange = (event) => {
-        setSize(event.target.value);
-    }
+  // function to update medical state of the animal
+  const handleMedicalChange = (event) => {
+    setMedical(event.target.value);
+  };
 
-    // function to update medical state of the animal
-    const handleMedicalChange = (event) => {
-        setMedical(event.target.value);
-    }
+  // function to update passport state of the animal
+  const handlePassportChange = (event) => {
+    setPassport(event.target.value);
+  };
 
-    // function to update passport state of the animal
-    const handlePassportChange = (event) => {
-        setPassport(event.target.value);
-    }
+  // function to update vaccines state of the animal
+  const handleVaccinesChange = (event) => {
+    setVaccines(event.target.value);
+  };
 
-    // function to update vaccines state of the animal
-    const handleVaccinesChange = (event) => {
-        setVaccines(event.target.value);
-    }
+  // function to update picture state of the animal
+  const handlePictureChange = (event) => {
+    setPicture(event.target.value);
+  };
 
-    // function to update picture state of the animal
-    const handlePictureChange = (event) => {
-        setPicture(event.target.value);
-    }
+
 
     return (
         <div className="animal">
@@ -119,39 +121,3 @@ const {getToken, updateUser} = useContext(AuthContext)
 }
 
 export default Animal;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

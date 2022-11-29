@@ -37,7 +37,9 @@ export default function App() {
             }
           })
           .map((item) => (
-            <li key={item.name}>{item.name}</li>
+            <li key={item.name}>{item.name}
+            {/* <img src={img}/> */}
+            </li>
           ))}
       </div>
     </div>

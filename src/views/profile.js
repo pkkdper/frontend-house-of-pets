@@ -15,6 +15,7 @@ function Profile(props) {
   const [changedName, setChangedName] = useState("");
   const [changedAge, setChangedAge] = useState("");
   const [changedLocation, setChangedLocation] = useState("");
+  const [changedPicture, setChangedPicture] = useState("");
 
   useEffect(() => {
     if (user) {
@@ -70,7 +71,8 @@ function Profile(props) {
           username: changedUsername,
           location: changedLocation,
           age: changedAge,
-          surname: changedSurname
+          surname: changedSurname,
+          picture: changedPicture
         }),
       });
     const parsed = result.json()
@@ -86,7 +88,7 @@ function Profile(props) {
       <form onSubmit={handleSubmit}>
         <label>
           Email:
-          <input type="email" defaultValue={profileUser.email} onChange={(e) => setChangedEmail(e.target.value)}name="email" />
+          <input type="text" defaultValue={profileUser.email} onChange={(e) => setChangedEmail(e.target.value)}name="email" />
         </label>
         <label>
           Username:
@@ -108,20 +110,28 @@ function Profile(props) {
           Age:
           <input type="number" placeholder="add age" name="age" onChange={(e) => setChangedAge(e.target.value)} defaultValue={profileUser.age}/>
         </label>
-        <label>
-          Picture:
-          <input type="text" placeholder="upload img" name="picture"/>
-        </label>
+        <button><label for="img">
+          Upload Picture:
+          <input type="file" style={{display:"none"}} id="img" placeholder="add image" name="picture" onChange={(e) => setChangedPicture(e.target.value)}/>
+        </label></button>
         <label>
           Animals:
-          <input type="text" placeholder="add animals to your profile in animals page"/>
+          <li></li>
+
+{/*           
+          .map((item) => (
+            <li key={item.name}>{item.name}
+            {/* <img src={img}/> */}
+            {/* </li> */} 
+
+
           <Link to="/auth/animal">
             <button>Add animal</button>
           </Link>
         </label>
         <label>
           Houses:
-          <input type="text" placeholder="to see any houses rent them" />
+          <li></li>
         </label>
         <button type="submit">Update</button>
       </form>

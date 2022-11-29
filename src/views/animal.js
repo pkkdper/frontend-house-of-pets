@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
@@ -28,7 +28,7 @@ const Animal = (props) => {
             picture
         })
         await ((response) => {
-            console.log(response.data.authToken)
+            console.log(response.data)
         });
         // const parsed = response.data;
         navigate('/animal');
@@ -105,9 +105,9 @@ const Animal = (props) => {
                     Picture:
                 </label>
                 <input type="picture" value={picture} onChange={handlePictureChange} />
-                <button onClick={handleSubmit} className="btn" type="submit">
+                <Link to="/profile"><button onClick={handleSubmit} className="btn" type="submit" >
                     Submit
-                </button>
+                </button></Link>
             </form>
         </div>
     );

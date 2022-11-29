@@ -14,8 +14,9 @@ function Profile(props) {
   const [changedSurname, setChangedSurname] = useState("");
   const [changedName, setChangedName] = useState("");
   const [changedAge, setChangedAge] = useState("");
-  const [changedLocation, setChangedLocation] = useState("");
   const [changedPicture, setChangedPicture] = useState("");
+  const [changedLocation, setChangedLocation] = useState("");
+  const [file, setFile] = useState(null)
 
   useEffect(() => {
     if (user) {
@@ -54,6 +55,9 @@ function Profile(props) {
     return <p>Loading</p>;
   }
 
+  function handleChange(event) {
+    setFile(event.target.files[0])
+  }
 
   const handleSubmit = async (event) => {
       event.preventDefault();
@@ -88,7 +92,7 @@ function Profile(props) {
       <form onSubmit={handleSubmit}>
         <label>
           Email:
-          <input type="text" defaultValue={profileUser.email} onChange={(e) => setChangedEmail(e.target.value)}name="email" />
+          <input type="email" defaultValue={profileUser.email} onChange={(e) => setChangedEmail(e.target.value)}name="email" />
         </label>
         <label>
           Username:
@@ -110,10 +114,10 @@ function Profile(props) {
           Age:
           <input type="number" placeholder="add age" name="age" onChange={(e) => setChangedAge(e.target.value)} defaultValue={profileUser.age}/>
         </label>
-        <button><label for="img">
-          Upload Picture:
+        <button><label htmlFor="img">
+          Choose a Picture:
           <input type="file" style={{display:"none"}} id="img" placeholder="add image" name="picture" onChange={(e) => setChangedPicture(e.target.value)}/>
-        </label></button>
+        </label></button><button onChange={handleChange}>Upload</button>
         <label>
           Animals:
           <li></li>

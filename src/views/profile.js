@@ -92,11 +92,11 @@ function Profile(props) {
       <form onSubmit={handleSubmit}>
         <label>
           Email:
-          <input type="email" defaultValue={profileUser.email} onChange={(e) => setChangedEmail(e.target.value)}name="email" />
+          <input type="text"  onChange={(e) => setChangedEmail(e.target.value)}name="email" defaultValue={profileUser.email}/>
         </label>
         <label>
           Username:
-          <input type="text" defaultValue={profileUser.username} onChange={(e) => setChangedUsername(e.target.value)} name="username"/>
+          <input type="text" onChange={(e) => setChangedUsername(e.target.value)} name="username" defaultValue={profileUser.username}/>
         </label>
         <label>
           Name:

@@ -4,6 +4,10 @@ import axios from 'axios';
 
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../contexts/auth.context';
+import { FormLabel, InputLabel, MenuItem, Select } from '@mui/material';
+
+
+
 
 
 
@@ -16,9 +20,11 @@ const Animal = (props) => {
     const [passport, setPassport] = useState(false)
     const [vaccines, setVaccines] = useState(false)
     const [picture, setPicture] = useState('')
-const {getToken, updateUser} = useContext(AuthContext)
+    const { getToken, updateUser } = useContext(AuthContext)
 
-// const [showanimal, setShowanimal] = useState(null)
+    // const [showanimal, setShowanimal] = useState(null)
+
+    const animalSize = [{ size: 'Small' }, { size: 'Medium' }, { size: 'Big' }, { size: 'Giant' }]
 
     const navigate = useNavigate()
     const handleSubmit = async (event) => {
@@ -32,7 +38,7 @@ const {getToken, updateUser} = useContext(AuthContext)
             passport,
             vaccines,
             picture
-        },  {headers: { Authorization: `Bearer ${token}` }})
+        }, { headers: { Authorization: `Bearer ${token}` } })
         // setShowanimal(event.target.value)
         updateUser()
         // const parsed = response.data;
@@ -44,57 +50,73 @@ const {getToken, updateUser} = useContext(AuthContext)
         // }
     };
 
-  // function to update name of the animal
-  const handleChange = (event) => {
-    setName(event.target.value);
-  };
+    // function to update name of the animal
+    const handleChange = (event) => {
+        setName(event.target.value);
+    };
 
-  // function to update type of the animal
-  const handleTypeChange = (event) => {
-    setType(event.target.value);
-  };
+    // function to update type of the animal
+    const handleTypeChange = (event) => {
+        setType(event.target.value);
+    };
 
-  // function to update size of the animal
-  const handleSizeChange = (event) => {
-    setSize(event.target.value);
-  };
+    // function to update size of the animal
+    const handleSizeChange = (event) => {
+        setSize(event.target.value);
+    };
 
-  // function to update medical state of the animal
-  const handleMedicalChange = (event) => {
-    setMedical(event.target.value);
-  };
+    // function to update medical state of the animal
+    const handleMedicalChange = (event) => {
+        setMedical(event.target.value);
+    };
 
-  // function to update passport state of the animal
-  const handlePassportChange = (event) => {
-    setPassport(event.target.value);
-  };
+    // function to update passport state of the animal
+    const handlePassportChange = (event) => {
+        setPassport(event.target.value);
+    };
 
-  // function to update vaccines state of the animal
-  const handleVaccinesChange = (event) => {
-    setVaccines(event.target.value);
-  };
+    // function to update vaccines state of the animal
+    const handleVaccinesChange = (event) => {
+        setVaccines(event.target.value);
+    };
 
-  // function to update picture state of the animal
-  const handlePictureChange = (event) => {
-    setPicture(event.target.value);
-  };
+    // function to update picture state of the animal
+    const handlePictureChange = (event) => {
+        setPicture(event.target.value);
+    };
+
 
 
 
     return (
         <div className="animal">
-            <h4>Add Animal</h4>
+            <h4>Create the profile of your Pet</h4>
             <form>
                 <label>Name: </label>
                 <input type="text" value={name} onChange={handleChange} />
-                <label>
-                    Type:
-                </label>
-                <input type="text" value={type} onChange={handleTypeChange} />
-                <label>
-                    Size:
-                </label>
-                <input type="text" value={size} onChange={handleSizeChange} />
+
+                <FormLabel id="demo-simple-select-label" >Type</FormLabel>
+                <Select labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={type}
+                    label="Type"
+                    onChange={handleTypeChange} >
+                    <MenuItem value={"Cat"}>Cat</MenuItem>
+                    <MenuItem value={"Dog"}>Dog</MenuItem>
+                </Select>
+
+                <FormLabel id="demo-simple-select-label" >Size</FormLabel>
+                <Select labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={size}
+                    label="Size"
+                    onChange={handleSizeChange} >
+                    <MenuItem value={"Small"}>Small</MenuItem>
+                    <MenuItem value={"Medium"}>Medium</MenuItem>
+                    <MenuItem value={"Big"}>Big</MenuItem>
+                    <MenuItem value={"Giant"}>Giant</MenuItem>
+                </Select>
+
                 <label>
                     Medical:
                 </label>

@@ -42,3 +42,9 @@ form {
   border: 2px solid rgb(112, 48, 86);
   padding: 30px;
 }
+
+.FormLabel {
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(112, 48, 86)
+}

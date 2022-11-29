@@ -8,7 +8,7 @@ import { AuthContext } from "../contexts/auth.context";
 function Profile(props) {
   const navigate = useNavigate();
   const [profileUser, setProfileUser] = useState(null);
-  const { user } = useContext(AuthContext);  
+  const { user, updateUser } = useContext(AuthContext);
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
   const [changedSurname, setChangedSurname] = useState("");
@@ -16,23 +16,24 @@ function Profile(props) {
   const [changedAge, setChangedAge] = useState("");
   const [changedPicture, setChangedPicture] = useState("");
   const [changedLocation, setChangedLocation] = useState("");
-  const [file, setFile] = useState(null)
+  const [file, setFile] = useState(null);
+  const [showanimal, setShowanimal] = useState(null);
 
-  useEffect(() => {
-    if (user) {
-      const getUsers = () => {
-        const id = user.payload.userCopy._id;
-        axios
-          .get(`http://localhost:5005/auth/profile/${id}`)
-          .then((response) => {
-            setProfileUser(response.data);
-          })
+  // useEffect(() => {
+  //   if (user) {
+  //     const getUsers = () => {
+  //       const id = user.payload.userCopy._id;
+  //       axios
+  //         .get(`http://localhost:5005/auth/profile/${id}`)
+  //         .then((response) => {
+  //           setProfileUser(response.data);
+  //         })
 
-          .catch((err) => console.log(err));
-      };
-      getUsers();
-    }
-  }, [user]);
+  //         .catch((err) => console.log(err));
+  //     };
+  //     getUsers();
+  //   }
+  // }, []);
   /*  console.log('userId', userId); */
   // const [userPage, setUserPage] = useState([]);
   /*   const foundUser = getUsers.find((oneUser) => {   //  <== ADD
@@ -51,84 +52,131 @@ function Profile(props) {
   // const setData = (data) => {
   //   console.log(data);
   // };
-  if (!profileUser) {
-    return <p>Loading</p>;
-  }
 
   function handleChange(event) {
-    setFile(event.target.files[0])
+    setFile(event.target.files[0]);
   }
+  useEffect(() => {
+    if (user) {
+      setChangedUsername(user.payload.userCopy.username);
+      setChangedEmail(user.payload.userCopy.email);
+      setChangedSurname(user.payload.userCopy.surname);
+      setChangedName(user.payload.userCopy.name);
+      setChangedAge(user.payload.userCopy.age);
+      setChangedPicture(user.payload.userCopy.picture);
+      setChangedLocation(user.payload.userCopy.location);
+    }
+  }, [user]);
 
   const handleSubmit = async (event) => {
-      event.preventDefault();
-      const id = user.payload.userCopy._id;
-      // const userInfo = user.payload.userCopy;
+    event.preventDefault();
+    const id = user.payload.userCopy._id;
+    // const userInfo = user.payload.userCopy;
 
-      const result = await fetch(`http://localhost:5005/auth/profile/${id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          name: changedName,
-          email: changedEmail,
-          username: changedUsername,
-          location: changedLocation,
-          age: changedAge,
-          surname: changedSurname,
-          picture: changedPicture
-        }),
-      });
-    const parsed = result.json()
+    const result = await fetch(`http://localhost:5005/auth/profile/${id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: changedName,
+        email: changedEmail,
+        username: changedUsername,
+        location: changedLocation,
+        age: changedAge,
+        surname: changedSurname,
+        picture: changedPicture,
+      }),
+    });
+    const parsed = result.json();
+    updateUser();
     // navigate("/")
   };
-  
-
+  if (!user) {
+    return <p>Loading</p>;
+  }
+  console.log("the user", user.payload.userCopy);
   return (
     <div className="App">
       <Navbar />
-      <h1>Hello {profileUser.username}</h1>
+      <h1>Hello {user.payload.userCopy.username}</h1>
 
       <form onSubmit={handleSubmit}>
         <label>
           Email:
-          <input type="text"  onChange={(e) => setChangedEmail(e.target.value)}name="email" defaultValue={profileUser.email}/>
+          <input
+            type="text"
+            onChange={(e) => setChangedEmail(e.target.value)}
+            name="email"
+            value={changedEmail}
+          />
         </label>
         <label>
           Username:
-          <input type="text" onChange={(e) => setChangedUsername(e.target.value)} name="username" defaultValue={profileUser.username}/>
+          <input
+            type="text"
+            onChange={(e) => setChangedUsername(e.target.value)}
+            name="username"
+            value={changedUsername}
+          />
         </label>
         <label>
           Name:
-          <input type="text" placeholder="add your name" name="name" onChange={(e) => setChangedName(e.target.value)} defaultValue={profileUser.name}/>
+          <input
+            type="text"
+            placeholder="add your name"
+            name="name"
+            onChange={(e) => setChangedName(e.target.value)}
+            value={changedName}
+          />
         </label>
         <label>
           Surname:
-          <input type="text" placeholder="add your surname" name="surname" onChange={(e) => setChangedSurname(e.target.value)} defaultValue={profileUser.surname}/>
+          <input
+            type="text"
+            placeholder="add your surname"
+            name="surname"
+            onChange={(e) => setChangedSurname(e.target.value)}
+            value={changedSurname}
+          />
         </label>
         <label>
           Location:
-          <input type="text" placeholder="add your location" name="location" onChange={(e) => setChangedLocation(e.target.value)} defaultValue={profileUser.location}/>
+          <input
+            type="text"
+            placeholder="add your location"
+            name="location"
+            onChange={(e) => setChangedLocation(e.target.value)}
+            value={changedLocation}
+          />
         </label>
         <label>
           Age:
-          <input type="number" placeholder="add age" name="age" onChange={(e) => setChangedAge(e.target.value)} defaultValue={profileUser.age}/>
+          <input
+            type="number"
+            placeholder="add age"
+            name="age"
+            onChange={(e) => setChangedAge(e.target.value)}
+            value={changedAge}
+          />
         </label>
-        <button><label htmlFor="img">
-          Choose a Picture:
-          <input type="file" style={{display:"none"}} id="img" placeholder="add image" name="picture" onChange={(e) => setChangedPicture(e.target.value)}/>
-        </label></button><button onChange={handleChange}>Upload</button>
+        <button>
+          <label htmlFor="img">
+            Choose a Picture:
+            <input
+              type="file"
+              style={{ display: "none" }}
+              id="img"
+              placeholder="add image"
+              name="picture"
+              onChange={(e) => setChangedPicture(e.target.value)}
+            />
+          </label>
+        </button>
         <label>
           Animals:
           <li></li>
-
-{/*           
-          .map((item) => (
-            <li key={item.name}>{item.name}
-            {/* <img src={img}/> */}
-            {/* </li> */} 
-
-
+          
           <Link to="/auth/animal">
             <button>Add animal</button>
           </Link>
@@ -141,6 +189,6 @@ function Profile(props) {
       </form>
     </div>
   );
-      }
+}
 
 export default Profile;

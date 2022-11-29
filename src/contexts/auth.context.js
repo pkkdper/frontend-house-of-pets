@@ -14,7 +14,10 @@ const navigate = useNavigate()
     //  <==  ADD
     localStorage.setItem("authToken", token);
   };
-
+const getToken = ()=> {
+  const storedToken = localStorage.getItem("authToken");
+return storedToken
+}
   const authenticateUser = () => {
     //  <==  ADD
     // Get the stored token from the localStorage
@@ -64,6 +67,19 @@ const navigate = useNavigate()
     authenticateUser();
   }, []);
 
+  const updateUser =() => {
+    const id = user.payload.userCopy._id
+    axios
+    .get(`http://localhost:5005/auth/profile/${id}`)
+    .then((response) => {
+      setUser({payload:{userCopy:response.data}});
+    })
+
+    .catch((err) => console.log(err));
+};
+  
+
+
   return (
     <AuthContext.Provider
       value={{
@@ -73,7 +89,9 @@ const navigate = useNavigate()
         storeToken,
         authenticateUser,
         removeToken,
-        logOutUser
+        logOutUser,
+        getToken,
+        updateUser
       }}
     >
       {props.children}

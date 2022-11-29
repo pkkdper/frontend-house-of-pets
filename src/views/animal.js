@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from '../contexts/auth.context';
 
 
 
@@ -14,10 +15,14 @@ const Animal = (props) => {
     const [passport, setPassport] = useState(false)
     const [vaccines, setVaccines] = useState(false)
     const [picture, setPicture] = useState('')
+const {getToken, updateUser} = useContext(AuthContext)
+
+// const [showanimal, setShowanimal] = useState(null)
 
     const navigate = useNavigate()
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const token = getToken()
         const response = await axios.post("http://localhost:5005/animals", {
             name,
             type,
@@ -26,12 +31,11 @@ const Animal = (props) => {
             passport,
             vaccines,
             picture
-        })
-        await ((response) => {
-            console.log(response.data)
-        });
+        },  {headers: { Authorization: `Bearer ${token}` }})
+        // setShowanimal(event.target.value)
+        updateUser()
         // const parsed = response.data;
-        navigate('/animal');
+        navigate('/auth/profile');
         // if (parsed.status === 200) {
         //   setToken(parsed.token);
         // } else {

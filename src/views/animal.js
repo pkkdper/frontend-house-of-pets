@@ -11,14 +11,14 @@ const Animal = (props) => {
     const [type, setType] = useState('')
     const [size, setSize] = useState('')
     const [medical, setMedical] = useState('')
-    const [passport, setPassport] = useState('')
-    const [vaccines, setVaccines] = useState('')
+    const [passport, setPassport] = useState(false)
+    const [vaccines, setVaccines] = useState(false)
     const [picture, setPicture] = useState('')
 
     const navigate = useNavigate()
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await axios.post("http://localhost:5005/animal", {
+        const response = await axios.post("http://localhost:5005/animals", {
             name,
             type,
             size,

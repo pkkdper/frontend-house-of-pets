@@ -18,6 +18,12 @@ function Navbar() {
             <button>Profile</button>
           </Link>
           <button onClick={logOutUser}>Logout</button>
+          <Link to={`/auth/main`}>
+            <button>Rent a house</button>
+          </Link>
+          <Link to={`/auth/animal`}>
+            <button>Add Pet</button>
+          </Link>
         </>
       )}
       {!isLoggedIn && (

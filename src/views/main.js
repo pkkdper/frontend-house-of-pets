@@ -41,9 +41,6 @@ export default function App() {
             if (item.pricepernight === search) {
               return item;
             }
-            if (item.photo === search) {
-              return item;
-            }
             if (item.maxnumberofdays === search) {
               return item;
             }
@@ -51,6 +48,18 @@ export default function App() {
               return item;
             }
             if (item.type === search) {
+              return item;
+            }
+            if (item.animaltype === search) {
+              return item;
+            }
+            if (item.maxsizeofanimal === search) {
+              return item;
+            }
+            if (item.maxnumberofanimals === search) {
+              return item;
+            }
+            if (item.photo === search) {
               return item;
             }
           })
@@ -62,6 +71,12 @@ export default function App() {
               <p>Max numbers of days: {item.maxnumberofdays}</p>
               <p>Rooms: {item.rooms}</p>
               <p>Type: {item.type}</p>
+              <p>Animal Type: {item.animaltype}</p>
+              <p>Max size of animal: {item.maxsizeofanimal}</p>
+              <p>Max of number of animals: {item.maxnumberofanimals}</p>
+              <p>
+                Photo: <img src={item.photo} alt="photo" />
+              </p>
             </li>
           ))}
       </div>

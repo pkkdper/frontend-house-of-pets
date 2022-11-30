@@ -8,7 +8,7 @@ import { AuthContext } from "../contexts/auth.context";
 function Profile(props) {
   const navigate = useNavigate();
   const [profileUser, setProfileUser] = useState(null);
-  const { user, updateUser } = useContext(AuthContext);
+  const { user, updateUser, isLoggedIn, logOutUser } = useContext(AuthContext);
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
   const [changedSurname, setChangedSurname] = useState("");
@@ -96,6 +96,7 @@ function Profile(props) {
     return <p>Loading</p>;
   }
   console.log("the user", user.payload.userCopy);
+
   return (
     <div className="App">
       <Navbar />
@@ -176,7 +177,6 @@ function Profile(props) {
         <label>
           Animals:
           <li></li>
-          
           <Link to="/auth/animal">
             <button>Add animal</button>
           </Link>

@@ -17,6 +17,9 @@ function Navbar() {
           <Link to={`/auth/profile`}>
             <button>Profile</button>
           </Link>
+          <Link to={`/auth/main`}>
+            <button>Houses</button>
+          </Link>
           <button onClick={logOutUser}>Logout</button>
         </>
       )}

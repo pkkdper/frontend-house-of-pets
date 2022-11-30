@@ -8,7 +8,7 @@ import { AuthContext } from "../contexts/auth.context";
 function Profile(props) {
   const navigate = useNavigate();
   const [profileUser, setProfileUser] = useState(null);
-  const { user, updateUser } = useContext(AuthContext);
+  const { user, updateUser, isLoading } = useContext(AuthContext);
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
   const [changedSurname, setChangedSurname] = useState("");
@@ -57,7 +57,7 @@ function Profile(props) {
     setFile(event.target.files[0]);
   }
   useEffect(() => {
-    if (user) {
+    if (!isLoading) {
       setChangedUsername(user.payload.userCopy.username);
       setChangedEmail(user.payload.userCopy.email);
       setChangedSurname(user.payload.userCopy.surname);
@@ -66,7 +66,7 @@ function Profile(props) {
       setChangedPicture(user.payload.userCopy.picture);
       setChangedLocation(user.payload.userCopy.location);
     }
-  }, [user]);
+  }, [isLoading, user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -95,7 +95,7 @@ function Profile(props) {
   if (!user) {
     return <p>Loading</p>;
   }
-  console.log("the user", user.payload.userCopy);
+  console.log("the user", user);
   return (
     <div className="App">
       <Navbar />
@@ -182,8 +182,10 @@ function Profile(props) {
           </Link>
         </label>
         <label>
-          Houses:
-          <li></li>
+          Houses:<ul >{user && user.payload.userCopy.houses.map((house)=>{
+             return (<li key={house._id}>{ house.name}</li>)
+          })}
+         </ul>
         </label>
         <button type="submit">Update</button>
       </form>

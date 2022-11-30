@@ -6,12 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../contexts/auth.context';
 import { FormLabel, InputLabel, MenuItem, Select } from '@mui/material';
 
-
-
-
-
-
-
 const Animal = (props) => {
     const [name, setName] = useState('')
     const [type, setType] = useState('')
@@ -21,8 +15,6 @@ const Animal = (props) => {
     const [vaccines, setVaccines] = useState(false)
     const [picture, setPicture] = useState('')
     const { getToken, updateUser } = useContext(AuthContext)
-
-    // const [showanimal, setShowanimal] = useState(null)
 
     const animalSize = [{ size: 'Small' }, { size: 'Medium' }, { size: 'Big' }, { size: 'Giant' }]
 

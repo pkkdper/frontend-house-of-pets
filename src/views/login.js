@@ -16,7 +16,7 @@ const LoginPage = (props) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:5005/auth/login", {
+      .post(`${process.env.REACT_APP_BACKEND_URL}/auth/login`, {
         username,
         password,
       })

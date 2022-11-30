@@ -10,7 +10,7 @@ export default function App() {
   const handleSearch = (e) => {};
 
   useEffect(() => {
-    axios("http://localhost:5005/house/houses")
+    axios(`${process.env.REACT_APP_BACKEND_URL}/house/houses`)
       .then((response) => {
         //console.log(response.data); // get all the houses from the DB
         setAllData(response.data); // this is the way to change the value of allData

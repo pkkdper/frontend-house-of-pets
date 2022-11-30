@@ -31,7 +31,7 @@ const Animal = (props) => {
     event.preventDefault();
     const token = getToken();
     const response = await axios.post(
-      "http://localhost:5005/animals",
+      `${process.env.REACT_APP_BACKEND_URL}/animals`,
       {
         name,
         type,

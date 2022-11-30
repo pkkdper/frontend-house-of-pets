@@ -73,21 +73,24 @@ function Profile(props) {
     const id = user.payload.userCopy._id;
     // const userInfo = user.payload.userCopy;
 
-    const result = await fetch(`http://localhost:5005/auth/profile/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: changedName,
-        email: changedEmail,
-        username: changedUsername,
-        location: changedLocation,
-        age: changedAge,
-        surname: changedSurname,
-        picture: changedPicture,
-      }),
-    });
+    const result = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/auth/profile/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: changedName,
+          email: changedEmail,
+          username: changedUsername,
+          location: changedLocation,
+          age: changedAge,
+          surname: changedSurname,
+          picture: changedPicture,
+        }),
+      }
+    );
     const parsed = result.json();
     updateUser();
     // navigate("/")

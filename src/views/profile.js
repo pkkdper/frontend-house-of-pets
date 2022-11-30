@@ -7,7 +7,7 @@ import { AuthContext } from "../contexts/auth.context";
 
 function Profile(props) {
   const navigate = useNavigate();
-  const [profileUser, setProfileUser] = useState(null);
+  // const [profileUser, setProfileUser] = useState(null);
   const { user, updateUser, isLoading } = useContext(AuthContext);
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
@@ -17,41 +17,6 @@ function Profile(props) {
   const [changedPicture, setChangedPicture] = useState("");
   const [changedLocation, setChangedLocation] = useState("");
   const [file, setFile] = useState(null);
-  const [showanimal, setShowanimal] = useState(null);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     const getUsers = () => {
-  //       const id = user.payload.userCopy._id;
-  //       axios
-  //         .get(`http://localhost:5005/auth/profile/${id}`)
-  //         .then((response) => {
-  //           setProfileUser(response.data);
-  //         })
-
-  //         .catch((err) => console.log(err));
-  //     };
-  //     getUsers();
-  //   }
-  // }, []);
-  /*  console.log('userId', userId); */
-  // const [userPage, setUserPage] = useState([]);
-  /*   const foundUser = getUsers.find((oneUser) => {   //  <== ADD
-    return oneUser._id === userId;
-  }); */
-  /* useEffect(() => {
-    const verifyUser = async () => {
-      const storedToken = localStorage.getItem("authToken");
-      let verifyRes = await axios.get(`http://localhost:5005/auth/verify`, {
-        headers: { authorization: `Bearer ${storedToken}` },
-      });
-      console.log("profile page", verifyRes.data);
-    };
-    verifyUser();
-  }, []); */
-  // const setData = (data) => {
-  //   console.log(data);
-  // };
 
   function handleChange(event) {
     setFile(event.target.files[0]);
@@ -90,12 +55,11 @@ function Profile(props) {
     });
     const parsed = result.json();
     updateUser();
-    // navigate("/")
   };
   if (!user) {
     return <p>Loading</p>;
   }
-  console.log("the user", user);
+  // console.log("the user", user);
   return (
     <div className="App">
       <Navbar />
@@ -175,17 +139,33 @@ function Profile(props) {
         </button>
         <label>
           Animals:
-          <li></li>
-          
-          <Link to="/auth/animal">
-            <button>Add animal</button>
-          </Link>
+          {user &&
+            user.payload.userCopy.animals.map((animal) => {
+              return (
+                <div key={animal._id}>
+                  <ul >
+                    <li>{animal.name}</li>
+                    <li>{animal.type}</li>
+                  </ul>
+                  <button type="button">Delete Animal</button>
+                </div>
+              );
+            })}
         </label>
+        <Link to="/auth/animal">
+          <button type="button">Add animal</button>
+        </Link>
+
         <label>
-          Houses:<ul >{user && user.payload.userCopy.houses.map((house)=>{
-             return (<li key={house._id}>{ house.name}</li>)
-          })}
-         </ul>
+          Houses:
+          {user &&
+            user.payload.userCopy.houses.map((house) => {
+              return (
+                <ul key={house._id}>
+                  <li>{house.name}</li>
+                </ul>
+              );
+            })}
         </label>
         <button type="submit">Update</button>
       </form>

@@ -89,17 +89,13 @@ function Signup() {
     <>
       <Navbar />
       <div className="form">
-        <div>
-          <h1>User Registration</h1>
-        </div>
-
         {/* Calling to the methods */}
         <div className="messages">
           {errorMessage()}
           {successMessage()}
         </div>
 
-        <form>
+        <form className="signupstyle">
           {/* Labels and inputs for form data */}
           <label className="label">Name</label>
           <input

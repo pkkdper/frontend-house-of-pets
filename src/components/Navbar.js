@@ -7,51 +7,52 @@ import { AuthContext } from "../contexts/auth.context";
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   return (
-    <nav>
+    <div className="container">
       <img className="logo" src={HomeImage} alt="navbar-home" />
+      <nav>
+        <Link to="/">
+          <button type="button" className="button">
+            Home
+          </button>
+        </Link>
 
-      <Link to="/">
-        <button type="button" className="button">
-          Home
-        </button>
-      </Link>
+        {isLoggedIn && (
+          <>
+            <Link to={`/auth/profile`}>
+              <button type="button" className="button">
+                Profile
+              </button>
+            </Link>
 
-      {isLoggedIn && (
-        <>
-          <Link to={`/auth/profile`}>
-            <button type="button" className="button">
-              Profile
-            </button>
-          </Link>
-
-          <Link to={`/auth/main`}>
-            <button type="button" className="button">
-              Rent a house
-            </button>
-          </Link>
-          <Link to={`/auth/animal`}>
-            <button type="button" className="button">
-              Add Pet
-            </button>
-          </Link>
-          <Link>
-            <button type="button" className="button" onClick={logOutUser}>
-              Logout
-            </button>
-          </Link>
-        </>
-      )}
-      {!isLoggedIn && (
-        <>
-          <Link to="/auth/signup">
-            <button>Sign Up </button>
-          </Link>
-          <Link to="/auth/login">
-            <button>Login</button>
-          </Link>
-        </>
-      )}
-    </nav>
+            <Link to={`/auth/main`}>
+              <button type="button" className="button">
+                Rent a house
+              </button>
+            </Link>
+            <Link to={`/auth/animal`}>
+              <button type="button" className="button">
+                Add Pet
+              </button>
+            </Link>
+            <Link>
+              <button type="button" className="button" onClick={logOutUser}>
+                Logout
+              </button>
+            </Link>
+          </>
+        )}
+        {!isLoggedIn && (
+          <>
+            <Link to="/auth/signup">
+              <button>Sign Up </button>
+            </Link>
+            <Link to="/auth/login">
+              <button>Login</button>
+            </Link>
+          </>
+        )}
+      </nav>
+    </div>
   );
 }
 

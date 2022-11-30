@@ -50,29 +50,39 @@ const LoginPage = (props) => {
   return (
     <>
       <Navbar />
-      <form onSubmit={handleSubmit}>
+      <form className="loginstyle" onSubmit={handleSubmit}>
         {error?.message && <p>{error.message}</p>}
         <TextInput
+          className="TextInput"
           label="Username"
           variant="filled"
-          size="md"
+          size="sm"
           withAsterisk
           value={username}
           onChange={(event) => setUsername(event.target.value)}
           required
         />
         <PasswordInput
+          className="PasswordInput"
           label="Password"
           variant="filled"
-          size="md"
+          size="xl"
           withAsterisk
           value={password}
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-        <Button type="submit" variant="light" color="cyan" size="md" uppercase>
-          Login
-        </Button>
+        <div className="">
+          <Button
+            type="submit"
+            variant="light"
+            color="cyan"
+            size="md"
+            uppercase
+          >
+            Login
+          </Button>
+        </div>
       </form>
     </>
   );

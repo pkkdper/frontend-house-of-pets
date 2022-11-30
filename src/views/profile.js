@@ -56,6 +56,10 @@ function Profile(props) {
     const parsed = result.json();
     updateUser();
   };
+  const handleDeleteAnimal = async (id) => {
+    await axios.delete(`/animals/delete/${id}`);
+    updateUser();
+  };
   if (!user) {
     return <p>Loading</p>;
   }
@@ -137,25 +141,48 @@ function Profile(props) {
             />
           </label>
         </button>
-        <label>
-          Animals:
-          {user &&
-            user.payload.userCopy.animals.map((animal) => {
-              return (
-                <div key={animal._id}>
-                  <ul >
-                    <li>{animal.name}</li>
-                    <li>{animal.type}</li>
-                  </ul>
-                  <button type="button">Delete Animal</button>
-                </div>
-              );
-            })}
-        </label>
+        {/* <label> */}
+        Animals:
+        {user &&
+          user.payload.userCopy.animals.map((animal) => {
+            return (
+              <div key={animal._id}>
+                <ul>
+                  <li>Name: {animal.name}</li>
+                  <li>Type: {animal.type}</li>
+                  <li>Size: {animal.size}</li>
+                  {animal.passport ? (
+                    <li>Has Passport</li>
+                  ) : (
+                    <li>Doesn't have passport</li>
+                  )}
+                  {animal.vaccines ? (
+                    <li>Vaccinated</li>
+                  ) : (
+                    <li>Not Vaccinated</li>
+                  )}
+                  {animal.photo ? (
+                    <img src={animal.picture} />
+                  ) : (
+                    <li>No photo</li>
+                  )}
+                  
+                </ul>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleDeleteAnimal(animal._id);
+                  }}
+                >
+                  Delete Animal
+                </button>
+              </div>
+            );
+          })}
+        {/* </label> */}
         <Link to="/auth/animal">
           <button type="button">Add animal</button>
         </Link>
-
         <label>
           Houses:
           {user &&

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 const API_URL = "http://localhost:5005/";
 
 function Signup() {
@@ -120,12 +121,14 @@ function Signup() {
             value={password}
             type="password"
           />
-
-          <button onClick={handleSubmit} className="btn" type="submit">
-            Submit
-          </button>
+          <div className="container">
+            <button onClick={handleSubmit} className="btn" type="submit">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
+      <Footer />
     </>
   );
 }

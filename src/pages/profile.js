@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
+import Footer from "../components/Footer";
 
 function Profile(props) {
   const navigate = useNavigate();
@@ -121,7 +122,8 @@ function Profile(props) {
   return (
     <div className="App">
       <Navbar />
-      <h1>Hello {user.payload.userCopy.username}</h1>
+      <div className="h4">
+        <p>Hello {user.payload.userCopy.username[0].toUpperCase() + user.payload.userCopy.username.substring(1)}!</p></div>
 
       <form onSubmit={handleSubmitUser} encType="multipart/form-data">
         <label>
@@ -219,9 +221,10 @@ function Profile(props) {
               </div>
             );
           })}
-        {/* </label> */}
+
         <Link to="/auth/animal">
-          <button type="button">Add animal</button>
+          <button onClick={handleSubmit} className="btn" type="submit">
+            Add animal</button>
         </Link>
         <label>
           Houses:
@@ -234,7 +237,7 @@ function Profile(props) {
               );
             })}
         </label>
-        <button type="submit">Update</button>
+        <button onClick={handleSubmit} className="btn" type="submit">Update</button>
       </form>
       <form onSubmit={handleSubmitPicture}>
         <label htmlFor="img">
@@ -252,6 +255,7 @@ function Profile(props) {
       </form>
       <img src={user.payload.userCopy.picture} className="imageProfile"/>
     </div>
+
   );
 }
 

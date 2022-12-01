@@ -4,6 +4,7 @@ import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
+import Footer from "../components/Footer";
 
 function Profile(props) {
   const navigate = useNavigate();
@@ -60,17 +61,13 @@ function Profile(props) {
   };
   const handleDeleteAnimal = async (animalid) => {
     const id = user.payload.userCopy._id;
-    await axios.delete(`http://localhost:5005/animals/animal/${animalid}/delete/${id}`,);
+    await axios.delete(
+      `http://localhost:5005/animals/animal/${animalid}/delete/${id}`
+    );
     updateUser();
-
-
-
 
     // router.get('/movie-characters/delete/:id', (req, res) => {
     //   const animalId = req.params.id;
-
-
-
 
     //   apiService
     //     .deleteCharacter(animalId)
@@ -80,7 +77,6 @@ function Profile(props) {
     //     })
     //     .catch(error => console.log(error));
     // });
-
   };
   if (!user) {
     return <p>Loading</p>;
@@ -188,7 +184,6 @@ function Profile(props) {
                   ) : (
                     <li>No photo</li>
                   )}
-
                 </ul>
                 <button
                   type="button"
@@ -218,6 +213,7 @@ function Profile(props) {
         </label>
         <button type="submit">Update</button>
       </form>
+      <Footer />
     </div>
   );
 }

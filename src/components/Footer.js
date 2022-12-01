@@ -38,21 +38,22 @@ export function FooterSocial() {
   const { classes } = useStyles();
 
   return (
-    <div className={classes.footer}>
-      <Container className={classes.inner}>
-        <img className="footerlogo" src={FooterImage} alt="navbar-home" />
-        <Group spacing={10} className={classes.links} position="right" noWrap>
-          <ActionIcon size="lg">
-            <IconBrandTwitter size={35} stroke={2} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <IconBrandYoutube size={35} stroke={2} />
-          </ActionIcon>
-          <ActionIcon size="lg">
-            <IconBrandInstagram size={35} stroke={2} />
-          </ActionIcon>
-        </Group>
-      </Container>
+    <div className="footercontainer">
+      <div className={classes.footer}>
+        <Container className={classes.inner}>
+          <Group spacing={10} className={classes.links} position="right" noWrap>
+            <ActionIcon size="lg">
+              <IconBrandTwitter size={35} stroke={2} />
+            </ActionIcon>
+            <ActionIcon size="lg">
+              <IconBrandYoutube size={35} stroke={2} />
+            </ActionIcon>
+            <ActionIcon size="lg">
+              <IconBrandInstagram size={35} stroke={2} />
+            </ActionIcon>
+          </Group>
+        </Container>
+      </div>
     </div>
   );
 }

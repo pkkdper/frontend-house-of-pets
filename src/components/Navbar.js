@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import HomeImage from "../assets/home.png";
+import HomeImage from "../assets/houselogo.png";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
 import { Center } from "@mantine/core";

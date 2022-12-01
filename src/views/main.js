@@ -1,26 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { AuthContext } from "../contexts/auth.context";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function App() {
   const [allData, setAllData] = useState([]);
   const [filteredData, setFilteredData] = useState(allData);
   const [search, setSearch] = useState(``);
-  const handleSearch = (e) => {};
 
+  const handleSearch = (e) => {};
+const {user, updateUser} = useContext(AuthContext)
+const navigate = useNavigate()
+
+const fetchHouses = () => {
+  axios.get(`${process.env.REACT_APP_BACKEND_URL}/house/houses`)
+  .then((response) => {
+    //console.log(response.data); // get all the houses from the DB
+    setAllData(response.data); // this is the way to change the value of allData
+    setFilteredData(response.data);
+  })
+  .catch((error) => {
+    console.log("Error getting fake data: " + error);
+  });
+}
   useEffect(() => {
-    axios("http://localhost:5005/house/houses")
-      .then((response) => {
-        //console.log(response.data); // get all the houses from the DB
-        setAllData(response.data); // this is the way to change the value of allData
-        setFilteredData(response.data);
-      })
-      .catch((error) => {
-        console.log("Error getting fake data: " + error);
-      });
+    fetchHouses()
   }, []);
   console.log("All data", allData);
+
+  const handleAddHouse = async (id) => {
+await axios.get(`${process.env.REACT_APP_BACKEND_URL}/house/houses/renthouse/${id}/user/${user.payload.userCopy._id}`) ; 
+updateUser()
+// setIsDisabled(true)
+// navigate("/auth/profile")
+  }
+
   return (
     <div className="App">
       <div style={{ margin: "0 auto", marginTop: "10%" }}>
@@ -63,21 +79,22 @@ export default function App() {
               return item;
             }
           })
-          .map((item) => (
-            <li key={item._id}>
-              <p>{item.name}</p>
-              <p>Location: {item.location}</p>
-              <p>Price per night: {item.pricepernight}</p>
-              <p>Max numbers of days: {item.maxnumberofdays}</p>
-              <p>Rooms: {item.rooms}</p>
-              <p>Type: {item.type}</p>
-              <p>Animal Type: {item.animaltype}</p>
-              <p>Max size of animal: {item.maxsizeofanimal}</p>
-              <p>Max of number of animals: {item.maxnumberofanimals}</p>
-              <p>
-                Photo: <img src={item.photo} alt="photo" />
-              </p>
-            </li>
+          .map((item, index) => (
+            <ul key={item._id}>
+              <li>{item.name}</li>
+              <li>Location: {item.location}</li>
+              <li>Price per night: {item.pricepernight}</li>
+              <li>Max numbers of days: {item.maxnumberofdays}</li>
+              <li>Rooms: {item.rooms}</li>
+              <li>Type: {item.type}</li>
+              <li>Animal Type: {item.animaltype}</li>
+              <li>Max size of animal: {item.maxsizeofanimal}</li>
+              <li>Max of number of animals: {item.maxnumberofanimals}</li>
+              <li>Photo: <img src={item.photo} alt="photo"/></li>
+              <button onClick={()=>{handleAddHouse(item._id)}} type="button" disabled={
+                user.payload.userCopy.houses.some((house)=>house._id===item._id)
+              }>Rent</button>
+            </ul>
           ))}
       </div>
     </div>

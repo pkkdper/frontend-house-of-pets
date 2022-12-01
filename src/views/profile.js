@@ -7,57 +7,21 @@ import { AuthContext } from "../contexts/auth.context";
 
 function Profile(props) {
   const navigate = useNavigate();
-  const [profileUser, setProfileUser] = useState(null);
-  const { user, updateUser, isLoggedIn, logOutUser } = useContext(AuthContext);
+  const { user, updateUser, isLoading } = useContext(AuthContext);
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
   const [changedSurname, setChangedSurname] = useState("");
   const [changedName, setChangedName] = useState("");
-  const [changedAge, setChangedAge] = useState("");
+  const [changedAge, setChangedAge] = useState(0);
   const [changedPicture, setChangedPicture] = useState("");
   const [changedLocation, setChangedLocation] = useState("");
   const [file, setFile] = useState(null);
-  const [showanimal, setShowanimal] = useState(null);
-
-  // useEffect(() => {
-  //   if (user) {
-  //     const getUsers = () => {
-  //       const id = user.payload.userCopy._id;
-  //       axios
-  //         .get(`http://localhost:5005/auth/profile/${id}`)
-  //         .then((response) => {
-  //           setProfileUser(response.data);
-  //         })
-
-  //         .catch((err) => console.log(err));
-  //     };
-  //     getUsers();
-  //   }
-  // }, []);
-  /*  console.log('userId', userId); */
-  // const [userPage, setUserPage] = useState([]);
-  /*   const foundUser = getUsers.find((oneUser) => {   //  <== ADD
-    return oneUser._id === userId;
-  }); */
-  /* useEffect(() => {
-    const verifyUser = async () => {
-      const storedToken = localStorage.getItem("authToken");
-      let verifyRes = await axios.get(`http://localhost:5005/auth/verify`, {
-        headers: { authorization: `Bearer ${storedToken}` },
-      });
-      console.log("profile page", verifyRes.data);
-    };
-    verifyUser();
-  }, []); */
-  // const setData = (data) => {
-  //   console.log(data);
-  // };
 
   function handleChange(event) {
     setFile(event.target.files[0]);
   }
   useEffect(() => {
-    if (user) {
+    if (!isLoading) {
       setChangedUsername(user.payload.userCopy.username);
       setChangedEmail(user.payload.userCopy.email);
       setChangedSurname(user.payload.userCopy.surname);
@@ -66,37 +30,62 @@ function Profile(props) {
       setChangedPicture(user.payload.userCopy.picture);
       setChangedLocation(user.payload.userCopy.location);
     }
-  }, [user]);
+  }, [isLoading, user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const id = user.payload.userCopy._id;
     // const userInfo = user.payload.userCopy;
 
-    const result = await fetch(`http://localhost:5005/auth/profile/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: changedName,
-        email: changedEmail,
-        username: changedUsername,
-        location: changedLocation,
-        age: changedAge,
-        surname: changedSurname,
-        picture: changedPicture,
-      }),
-    });
+    const result = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/auth/profile/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: changedName,
+          email: changedEmail,
+          username: changedUsername,
+          location: changedLocation,
+          age: changedAge,
+          surname: changedSurname,
+          picture: changedPicture,
+        }),
+      }
+    );
     const parsed = result.json();
     updateUser();
-    // navigate("/")
+  };
+  const handleDeleteAnimal = async (animalid) => {
+    const id = user.payload.userCopy._id;
+    await axios.delete(`http://localhost:5005/animals/animal/${animalid}/delete/${id}`,);
+    updateUser();
+
+
+
+
+    // router.get('/movie-characters/delete/:id', (req, res) => {
+    //   const animalId = req.params.id;
+
+
+
+
+    //   apiService
+    //     .deleteCharacter(animalId)
+    //     .then((response) => {
+    //        res.json(response.data);
+    //       // res.redirect(`/movie-characters/list`); // <== leave this line commented for now
+    //     })
+    //     .catch(error => console.log(error));
+    // });
+
   };
   if (!user) {
     return <p>Loading</p>;
   }
-  console.log("the user", user.payload.userCopy);
-
+  // console.log("the user", user);
   return (
     <div className="App">
       <Navbar />
@@ -174,14 +163,58 @@ function Profile(props) {
             />
           </label>
         </button>
-        <label>
-          Animals:
-          <li></li>
+        {/* <label> */}
+        Animals:
+        {user &&
+          user.payload.userCopy.animals.map((animal) => {
+            return (
+              <div key={animal._id}>
+                <ul>
+                  <li>Name: {animal.name}</li>
+                  <li>Type: {animal.type}</li>
+                  <li>Size: {animal.size}</li>
+                  {animal.passport ? (
+                    <li>Has Passport</li>
+                  ) : (
+                    <li>Doesn't have passport</li>
+                  )}
+                  {animal.vaccines ? (
+                    <li>Vaccinated</li>
+                  ) : (
+                    <li>Not Vaccinated</li>
+                  )}
+                  {animal.photo ? (
+                    <img src={animal.picture} />
+                  ) : (
+                    <li>No photo</li>
+                  )}
 
-        </label>
+                </ul>
+                <button
+                  type="button"
+                  onClick={() => {
+                    handleDeleteAnimal(animal._id);
+                  }}
+                >
+                  Delete Animal
+                </button>
+              </div>
+            );
+          })}
+        {/* </label> */}
+        <Link to="/auth/animal">
+          <button type="button">Add animal</button>
+        </Link>
         <label>
           Houses:
-          <li></li>
+          {user &&
+            user.payload.userCopy.houses.map((house) => {
+              return (
+                <ul key={house._id}>
+                  <li key={house._id}>{house.name}</li>
+                </ul>
+              );
+            })}
         </label>
         <button type="submit">Update</button>
       </form>

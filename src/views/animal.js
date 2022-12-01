@@ -18,21 +18,14 @@ const Animal = (props) => {
   const [picture, setPicture] = useState("");
   const { getToken, updateUser } = useContext(AuthContext);
 
-  // const [showanimal, setShowanimal] = useState(null)
-
-  const animalSize = [
-    { size: "Small" },
-    { size: "Medium" },
-    { size: "Big" },
-    { size: "Giant" },
-  ];
+  const animalSize = [{ size: 'Small' }, { size: 'Medium' }, { size: 'Big' }, { size: 'Giant' }]
 
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const token = getToken();
     const response = await axios.post(
-      "http://localhost:5005/animals",
+      `${process.env.REACT_APP_BACKEND_URL}/animals`,
       {
         name,
         type,

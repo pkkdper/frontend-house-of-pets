@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";import Navbar from "../components/Navbar";
-const API_URL="http://localhost:5005/"
+import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
+const API_URL = "http://localhost:5005/";
 
 function Signup() {
   // States for registration
@@ -12,7 +13,6 @@ function Signup() {
   // States for checking the errors
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
-
 
   // Handling the name change
   const handleName = (e) => {
@@ -36,18 +36,19 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("yes");
-    const response = await fetch("http://localhost:5005/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password, email }),
-    })
-      const parsed = await response.json()
-      console.log(parsed)
-      navigate('/auth/login');
-    
-
+    const response = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/auth/signup`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password, email }),
+      }
+    );
+    const parsed = await response.json();
+    console.log(parsed);
+    navigate("/auth/login");
 
     if (username === "" || email === "" || password === "") {
       setError(true);
@@ -85,49 +86,47 @@ function Signup() {
   };
 
   return (
-    <><Navbar/>
-    <div className="form">
-      <div>
-        <h1>User Registration</h1>
+    <>
+      <Navbar />
+      <div className="form">
+        {/* Calling to the methods */}
+        <div className="messages">
+          {errorMessage()}
+          {successMessage()}
+        </div>
+
+        <form className="signupstyle">
+          {/* Labels and inputs for form data */}
+          <label className="label">Name</label>
+          <input
+            onChange={handleName}
+            className="input"
+            value={username}
+            type="text"
+          />
+
+          <label className="label">Email</label>
+          <input
+            onChange={handleEmail}
+            className="input"
+            value={email}
+            type="email"
+          />
+
+          <label className="label">Password</label>
+          <input
+            onChange={handlePassword}
+            className="input"
+            value={password}
+            type="password"
+          />
+
+          <button onClick={handleSubmit} className="btn" type="submit">
+            Submit
+          </button>
+        </form>
       </div>
-
-      {/* Calling to the methods */}
-      <div className="messages">
-        {errorMessage()}
-        {successMessage()}
-      </div>
-
-      <form>
-        {/* Labels and inputs for form data */}
-        <label className="label">Name</label>
-        <input
-          onChange={handleName}
-          className="input"
-          value={username}
-          type="text"
-        />
-
-        <label className="label">Email</label>
-        <input
-          onChange={handleEmail}
-          className="input"
-          value={email}
-          type="email"
-        />
-
-        <label className="label">Password</label>
-        <input
-          onChange={handlePassword}
-          className="input"
-          value={password}
-          type="password"
-        />
-
-        <button onClick={handleSubmit} className="btn" type="submit">
-          Submit
-        </button>
-      </form>
-    </div></>
+    </>
   );
 }
 

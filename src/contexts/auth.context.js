@@ -9,15 +9,18 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
-const navigate = useNavigate()
+  const [userId, setUserId] = useState()
+
+  const navigate = useNavigate();
+
   const storeToken = (token) => {
     //  <==  ADD
     localStorage.setItem("authToken", token);
   };
-const getToken = ()=> {
-  const storedToken = localStorage.getItem("authToken");
-return storedToken
-}
+  const getToken = () => {
+    const storedToken = localStorage.getItem("authToken");
+    return storedToken;
+  };
   const authenticateUser = () => {
     //  <==  ADD
     // Get the stored token from the localStorage
@@ -27,16 +30,18 @@ return storedToken
     if (storedToken) {
       // We must send the JWT token in the request's "Authorization" Headers
       axios
-        .get(`${API_URL}/auth/verify`, {
+        .get(`${process.env.REACT_APP_BACKEND_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
           // If the server verifies that JWT token is valid
           const user = response.data;
+          
           // Update state variables
           setIsLoggedIn(true);
           setIsLoading(false);
           setUser(user);
+          setUserId(user.payload.userCopy._id)
         })
         .catch((error) => {
           // If the server sends an error response (invalid token)
@@ -53,32 +58,35 @@ return storedToken
     }
   };
 
-  const removeToken =()=>{
-    localStorage.removeItem("authToken")
-  }
-  const logOutUser=()=>{
-    removeToken()
-    authenticateUser()
-    navigate('/')
-  }
+  const removeToken = () => {
+    localStorage.removeItem("authToken");
+  };
+  const logOutUser = () => {
+    removeToken();
+    authenticateUser();
+    navigate("/");
+  };
 
   useEffect(() => {
     //  <==  ADD
     authenticateUser();
   }, []);
 
-  const updateUser =() => {
-    const id = user.payload.userCopy._id
+  const updateUser = () => {
     axios
-    .get(`http://localhost:5005/auth/profile/${id}`)
-    .then((response) => {
-      setUser({payload:{userCopy:response.data}});
-    })
+      .get(`${process.env.REACT_APP_BACKEND_URL}/auth/profile/${userId}`)
+      .then((response) => {
+        setUser({ payload: { userCopy: response.data } });
+      })
 
-    .catch((err) => console.log(err));
-};
-  
+      .catch((err) => console.log(err));
+  };
 
+  useEffect(() => {
+    if(userId) {
+      updateUser(); //get the route that gives us populated version
+    }
+  }, [userId])
 
   return (
     <AuthContext.Provider
@@ -91,12 +99,12 @@ return storedToken
         removeToken,
         logOutUser,
         getToken,
-        updateUser
+        updateUser,
       }}
     >
       {props.children}
     </AuthContext.Provider>
   );
 }
- 
+
 export { AuthProviderWrapper, AuthContext };

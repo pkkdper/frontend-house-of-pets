@@ -57,8 +57,29 @@ function Profile(props) {
     updateUser();
   };
   const handleDeleteAnimal = async (id) => {
-    await axios.delete(`/animals/delete/${id}`);
+    await axios.delete(`http://localhost:5005/animals/delete/${id}`, {
+      params: { id }
+  });
     updateUser();
+
+
+
+
+    // router.get('/movie-characters/delete/:id', (req, res) => {
+    //   const animalId = req.params.id;
+     
+
+
+
+    //   apiService
+    //     .deleteCharacter(animalId)
+    //     .then((response) => {
+    //        res.json(response.data);
+    //       // res.redirect(`/movie-characters/list`); // <== leave this line commented for now
+    //     })
+    //     .catch(error => console.log(error));
+    // });
+     
   };
   if (!user) {
     return <p>Loading</p>;

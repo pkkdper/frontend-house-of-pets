@@ -53,7 +53,8 @@ const LoginPage = (props) => {
       <Navbar />
       <form className="loginstyle" onSubmit={handleSubmit}>
         {error?.message && <p>{error.message}</p>}
-        <TextInput
+        <label> Username</label>
+        <input
           className="TextInput"
           label="Username"
           variant="filled"
@@ -63,9 +64,11 @@ const LoginPage = (props) => {
           onChange={(event) => setUsername(event.target.value)}
           required
         />
-        <PasswordInput
+        <label>Password</label>
+        <input
           className="PasswordInput"
           label="Password"
+          type="password"
           variant="filled"
           size="xl"
           withAsterisk
@@ -73,8 +76,9 @@ const LoginPage = (props) => {
           onChange={(event) => setPassword(event.target.value)}
           required
         />
-        <div className="">
-          <Button
+        <div className="container">
+          <button
+            className="btn"
             type="submit"
             variant="light"
             color="cyan"
@@ -82,7 +86,7 @@ const LoginPage = (props) => {
             uppercase
           >
             Login
-          </Button>
+          </button>
         </div>
       </form>
       <Footer />

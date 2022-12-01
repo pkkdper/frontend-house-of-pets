@@ -121,10 +121,11 @@ function Signup() {
             value={password}
             type="password"
           />
-
-          <button onClick={handleSubmit} className="btn" type="submit">
-            Submit
-          </button>
+          <div className="container">
+            <button onClick={handleSubmit} className="btn" type="submit">
+              Submit
+            </button>
+          </div>
         </form>
       </div>
       <Footer />

@@ -20,15 +20,16 @@ function Navbar() {
           <Link to={`/auth/profile`}>
             <button className="btn">Profile</button>
           </Link>
-          <button className="btn" onClick={logOutUser}>
-            Logout
-          </button>
+
           <Link to={`/auth/main`}>
             <button className="btn">Rent a house</button>
           </Link>
           <Link to={`/auth/animal`}>
             <button className="btn">Add Pet</button>
           </Link>
+          <button className="btn" onClick={logOutUser}>
+            Logout
+          </button>
         </>
       )}
       {!isLoggedIn && (

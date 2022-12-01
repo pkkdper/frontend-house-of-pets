@@ -96,6 +96,32 @@ function Profile(props) {
     updateUser();
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const id = user.payload.userCopy._id;
+    // const userInfo = user.payload.userCopy;
+
+    const result = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/auth/profile/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: changedName,
+          email: changedEmail,
+          username: changedUsername,
+          location: changedLocation,
+          age: changedAge,
+          surname: changedSurname,
+          picture: changedPicture,
+        }),
+      }
+    );
+    const parsed = result.json();
+    updateUser();
+  }
   const handleDeleteAnimal = async (animalid) => {
     const id = user.payload.userCopy._id;
     await axios.delete(
@@ -223,7 +249,7 @@ function Profile(props) {
           })}
 
         <Link to="/auth/animal">
-          <button onClick={handleSubmit} className="btn" type="submit">
+          <button className="btn" type="button">
             Add animal</button>
         </Link>
         <label>

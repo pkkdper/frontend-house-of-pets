@@ -29,6 +29,9 @@ function Navbar() {
           </Link>
           <img src={user.payload.userCopy.picture} className="imageProfileNav"/>
           <p>{user.payload.userCopy.username}</p>
+          <button className="btn" onClick={logOutUser}>
+            Logout
+          </button>
         </>
       )}
       {!isLoggedIn && (

@@ -142,6 +142,7 @@ form {
   color: rgb(65, 62, 62);
   align-items: center;
   margin-top: 30px;
+  background: linear-gradient(50deg, rgb(232, 227, 229) 20%, rgb(223, 76, 91) 100%);
 }
 .imageProfile {
   border-radius: 50%;
@@ -154,7 +155,4 @@ form {
   object-fit: cover;
   width: 120px;
   height: 120px;
-  background: linear-gradient(50deg,
-      rgb(232, 227, 229) 20%,
-      rgb(223, 76, 91) 100%);
 }

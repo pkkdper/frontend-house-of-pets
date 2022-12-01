@@ -100,6 +100,7 @@ function AuthProviderWrapper(props) {
         logOutUser,
         getToken,
         updateUser,
+        setUser
       }}
     >
       {props.children}

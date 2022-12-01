@@ -25,6 +25,8 @@ function Navbar() {
           <Link to={`/auth/animal`}>
             <button className="btn">Add Pet</button>
           </Link>
+          <img src={user.payload.userCopy.picture} className="imageProfileNav"/>
+          <p>{user.payload.userCopy.username}</p>
         </>
       )}
       {!isLoggedIn && (

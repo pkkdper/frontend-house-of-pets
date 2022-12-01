@@ -112,3 +112,15 @@ form {
   margin-top: 30px;
   background: linear-gradient(50deg, rgb(232, 227, 229) 20%, rgb(223, 76, 91) 100%);
 }
+.imageProfile {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 150px;
+  height: 150px;
+}
+.imageProfileNav {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 120px;
+  height: 120px;
+}

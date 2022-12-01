@@ -7,7 +7,7 @@ import { AuthContext } from "../contexts/auth.context";
 
 function Profile(props) {
   const navigate = useNavigate();
-  const { user, updateUser, isLoading } = useContext(AuthContext);
+  const { user, updateUser, isLoading, setUser } = useContext(AuthContext);
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
   const [changedSurname, setChangedSurname] = useState("");
@@ -32,13 +32,49 @@ function Profile(props) {
     }
   }, [isLoading, user]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmitPicture = async (event) => {
     event.preventDefault();
     const id = user.payload.userCopy._id;
     // const userInfo = user.payload.userCopy;
-
+    const image = event.target.imageUrl.files[0];
+    const formData = new FormData();
+    formData.append("imageUrl", image);
+    formData.append("name", changedName);
+    formData.append("email", changedEmail);
+    formData.append("username", changedUsername);
+    formData.append("location", changedLocation);
+    formData.append("age", changedAge);
+    formData.append("surname", changedSurname);
     const result = await fetch(
-      `${process.env.REACT_APP_BACKEND_URL}/auth/profile/${id}`,
+      `${process.env.REACT_APP_BACKEND_URL}/auth/profile/update/${id}/image`,
+      {
+        method: "POST",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: formData,
+      }
+    );
+    const parsed = await result.json();
+    console.log(parsed);
+    setUser(parsed);
+    updateUser();
+  };
+  const handleSubmitUser = async (event) => {
+    event.preventDefault();
+    const id = user.payload.userCopy._id;
+    // const userInfo = user.payload.userCopy;
+    // const image = event.target.imageUrl.files[0];
+    const formData = new FormData();
+    // formData.append("imageUrl", image);
+    // formData.append("name", changedName);
+    // formData.append("email", changedEmail);
+    // formData.append("username", changedUsername);
+    // formData.append("location", changedLocation);
+    // formData.append("age", changedAge);
+    // formData.append("surname", changedSurname);
+    const result = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/auth/profile/update/${id}`,
       {
         method: "POST",
         headers: {
@@ -46,31 +82,28 @@ function Profile(props) {
         },
         body: JSON.stringify({
           name: changedName,
-          email: changedEmail,
-          username: changedUsername,
-          location: changedLocation,
-          age: changedAge,
-          surname: changedSurname,
-          picture: changedPicture,
-        }),
+        email: changedEmail,
+       username: changedUsername,
+       location: changedLocation,
+       age: changedAge,
+       surname: changedSurname}),
       }
     );
-    const parsed = result.json();
+    const parsed = await result.json();
+    console.log(parsed);
+    setUser(parsed);
     updateUser();
   };
+
   const handleDeleteAnimal = async (animalid) => {
     const id = user.payload.userCopy._id;
-    await axios.delete(`http://localhost:5005/animals/animal/${animalid}/delete/${id}`,);
+    await axios.delete(
+      `http://localhost:5005/animals/animal/${animalid}/delete/${id}`
+    );
     updateUser();
-
-
-
 
     // router.get('/movie-characters/delete/:id', (req, res) => {
     //   const animalId = req.params.id;
-
-
-
 
     //   apiService
     //     .deleteCharacter(animalId)
@@ -80,7 +113,6 @@ function Profile(props) {
     //     })
     //     .catch(error => console.log(error));
     // });
-
   };
   if (!user) {
     return <p>Loading</p>;
@@ -91,7 +123,7 @@ function Profile(props) {
       <Navbar />
       <h1>Hello {user.payload.userCopy.username}</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmitUser} encType="multipart/form-data">
         <label>
           Email:
           <input
@@ -150,19 +182,6 @@ function Profile(props) {
             value={changedAge}
           />
         </label>
-        <button>
-          <label htmlFor="img">
-            Choose a Picture:
-            <input
-              type="file"
-              style={{ display: "none" }}
-              id="img"
-              placeholder="add image"
-              name="picture"
-              onChange={(e) => setChangedPicture(e.target.value)}
-            />
-          </label>
-        </button>
         {/* <label> */}
         Animals:
         {user &&
@@ -188,7 +207,6 @@ function Profile(props) {
                   ) : (
                     <li>No photo</li>
                   )}
-
                 </ul>
                 <button
                   type="button"
@@ -218,6 +236,21 @@ function Profile(props) {
         </label>
         <button type="submit">Update</button>
       </form>
+      <form onSubmit={handleSubmitPicture}>
+        <label htmlFor="img">
+          Choose a Picture:
+          <input
+            name="imageUrl"
+            accept="image/png, image/jpg"
+            type="file"
+            // style={{ display: "none" }}
+            id="img"
+            placeholder="add image"
+          />
+        </label>
+        <button type="submit">Upload</button>
+      </form>
+      <img src={user.payload.userCopy.picture} className="imageProfile"/>
     </div>
   );
 }

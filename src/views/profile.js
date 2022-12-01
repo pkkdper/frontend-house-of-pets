@@ -177,9 +177,7 @@ function Profile(props) {
         <label>
           Animals:
           <li></li>
-          <Link to="/auth/animal">
-            <button>Add animal</button>
-          </Link>
+
         </label>
         <label>
           Houses:

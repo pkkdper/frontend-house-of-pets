@@ -11,7 +11,7 @@ import { AuthContext } from "./contexts/auth.context";
 
 function App() {
   const { isAuthenticated } = useContext(AuthContext);
-  const [status , setStatus] = useState(false)
+  const [status, setStatus] = useState(false)
   return (
     <div className="App">
       <Routes>
@@ -19,7 +19,7 @@ function App() {
         <Route path="/auth/login" element={<Login />} />
         <Route path="/auth/signup" element={<Signup />} />
         <Route path="/auth/profile" element={<Profile />} />
-        <Route path="/auth/animal" element={<Animal /> } />
+        <Route path="/auth/animal" element={<Animal />} />
         <Route path="/auth/main" element={<Main />} />
       </Routes>
     </div>

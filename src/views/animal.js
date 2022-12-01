@@ -5,7 +5,8 @@ import Navbar from "../components/Navbar";
 
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
-import { FormLabel, InputLabel, MenuItem, Select } from "@mui/material";
+import { FormLabel, InputLabel, MenuItem, Select, GlobalStyles } from "@mui/material";
+import { borderLeft } from "@mui/system";
 
 const Animal = (props) => {
   const [name, setName] = useState("");
@@ -92,66 +93,74 @@ const Animal = (props) => {
   return (
     <div className="animal">
       <Navbar />
-      <h4>Create the profile of your Pet</h4>
+      <div className="h4">
+        <p>Create the profile of your pet:</p></div>
       <form>
-        <label>Name: </label>
-        <input type="text" value={name} onChange={handleChange} />
+        <div className="form-styling">
+          <label>Name: </label>
+          <input type="text" value={name} onChange={handleChange} />
 
-        <FormLabel id="demo-simple-select-label">Type</FormLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={type}
-          label="Type"
-          onChange={handleTypeChange}
-        >
-          <MenuItem value={"Cat"}>Cat</MenuItem>
-          <MenuItem value={"Dog"}>Dog</MenuItem>
-        </Select>
+          <label>Type: </label>
+          <FormLabel id="demo-simple-select-label"></FormLabel>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={type}
+            label="Type"
+            onChange={handleTypeChange}
+          >
+            <MenuItem value={"Cat"}>Cat</MenuItem>
+            <MenuItem value={"Dog"}>Dog</MenuItem>
+          </Select>
+          <div className="select-styling">
+            <label>Size: </label>
+            <FormLabel id="demo-simple-select-label"></FormLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={size}
+              label="Size"
+              onChange={handleSizeChange}
+            >
+              <MenuItem value={"Small"}>Small</MenuItem>
+              <MenuItem value={"Medium"}>Medium</MenuItem>
+              <MenuItem value={"Big"}>Big</MenuItem>
+              <MenuItem value={"Giant"}>Giant</MenuItem>
+            </Select>
+          </div>
 
-        <FormLabel id="demo-simple-select-label">Size</FormLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={size}
-          label="Size"
-          onChange={handleSizeChange}
-        >
-          <MenuItem value={"Small"}>Small</MenuItem>
-          <MenuItem value={"Medium"}>Medium</MenuItem>
-          <MenuItem value={"Big"}>Big</MenuItem>
-          <MenuItem value={"Giant"}>Giant</MenuItem>
-        </Select>
+          <label>Medical:</label>
+          <input type="text" value={medical} onChange={handleMedicalChange} />
+          <label>Passport:</label>
+          <input
+            type="checkbox"
+            value={passport}
+            onChange={handlePassportChange}
+          />
+          <label>Vaccines:</label>
+          <input
+            type="checkbox"
+            value={vaccines}
+            onChange={handleVaccinesChange}
+          />
+          <label>Picture:</label>
+          <input
+            id="picture"
+            type="file"
+            value={picture}
+            onChange={handlePictureChange}
+          />
 
-        <label>Medical:</label>
-        <input type="text" value={medical} onChange={handleMedicalChange} />
-        <label>Passport:</label>
-        <input
-          type="checkbox"
-          value={passport}
-          onChange={handlePassportChange}
-        />
-        <label>Vaccines:</label>
-        <input
-          type="checkbox"
-          value={vaccines}
-          onChange={handleVaccinesChange}
-        />
-        <label>Picture:</label>
-        <input
-          id="picture"
-          type="file"
-          value={picture}
-          onChange={handlePictureChange}
-        />
-        <input type="picture" value={picture} onChange={handlePictureChange} />
-        <Link to="/profile">
-          <button onClick={handleSubmit} className="btn" type="submit">
-            Submit
-          </button>
-        </Link>
+          <input type="picture" value={picture} onChange={handlePictureChange} />
+          <Link to="/profile">
+            <button onClick={handleSubmit} className="btn" type="submit">
+              Submit
+            </button>
+          </Link>
+        </div>
       </form>
     </div>
+
   );
 };
 

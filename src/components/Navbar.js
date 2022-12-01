@@ -3,36 +3,37 @@ import { Link } from "react-router-dom";
 import HomeImage from "../assets/home.png";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/auth.context";
+import { Center } from "@mantine/core";
 
 function Navbar() {
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
   return (
     <nav>
       <Link to="/">
-        <button>Home</button>
+        <button className="btn">Home</button>
       </Link>
-      <img src={HomeImage} alt="navbar-home" />
+      <img src={HomeImage} style={{ width: '300px', marginTop: 60, marginBottom: 205, }} alt="navbar-home" />
       {isLoggedIn && (
         <>
           <Link to={`/auth/profile`}>
-            <button>Profile</button>
+            <button className="btn">Profile</button>
           </Link>
-          <button onClick={logOutUser}>Logout</button>
+          <button className="btn" onClick={logOutUser}>Logout</button>
           <Link to={`/auth/main`}>
-            <button>Rent a house</button>
+            <button className="btn">Rent a house</button>
           </Link>
           <Link to={`/auth/animal`}>
-            <button>Add Pet</button>
+            <button className="btn">Add Pet</button>
           </Link>
         </>
       )}
       {!isLoggedIn && (
         <>
           <Link to="/auth/signup">
-            <button>Sign Up </button>
+            <button className="btn">Sign Up </button>
           </Link>
           <Link to="/auth/login">
-            <button>Login</button>
+            <button className="btn">Login</button>
           </Link>
         </>
       )}

@@ -10,31 +10,31 @@ export default function App() {
   const [filteredData, setFilteredData] = useState(allData);
   const [search, setSearch] = useState(``);
 
-  const handleSearch = (e) => {};
-const {user, updateUser} = useContext(AuthContext)
-const navigate = useNavigate()
+  const handleSearch = (e) => { };
+  const { user, updateUser } = useContext(AuthContext)
+  const navigate = useNavigate()
 
-const fetchHouses = () => {
-  axios.get(`${process.env.REACT_APP_BACKEND_URL}/house/houses`)
-  .then((response) => {
-    //console.log(response.data); // get all the houses from the DB
-    setAllData(response.data); // this is the way to change the value of allData
-    setFilteredData(response.data);
-  })
-  .catch((error) => {
-    console.log("Error getting fake data: " + error);
-  });
-}
+  const fetchHouses = () => {
+    axios.get(`${process.env.REACT_APP_BACKEND_URL}/house/houses`)
+      .then((response) => {
+        //console.log(response.data); // get all the houses from the DB
+        setAllData(response.data); // this is the way to change the value of allData
+        setFilteredData(response.data);
+      })
+      .catch((error) => {
+        console.log("Error getting fake data: " + error);
+      });
+  }
   useEffect(() => {
     fetchHouses()
   }, []);
   console.log("All data", allData);
 
   const handleAddHouse = async (id) => {
-await axios.get(`${process.env.REACT_APP_BACKEND_URL}/house/houses/renthouse/${id}/user/${user.payload.userCopy._id}`) ; 
-updateUser()
-// setIsDisabled(true)
-// navigate("/auth/profile")
+    await axios.get(`${process.env.REACT_APP_BACKEND_URL}/house/houses/renthouse/${id}/user/${user.payload.userCopy._id}`);
+    updateUser()
+    // setIsDisabled(true)
+    // navigate("/auth/profile")
   }
 
   return (
@@ -90,9 +90,9 @@ updateUser()
               <li>Animal Type: {item.animaltype}</li>
               <li>Max size of animal: {item.maxsizeofanimal}</li>
               <li>Max of number of animals: {item.maxnumberofanimals}</li>
-              <li>Photo: <img src={item.photo} alt="photo"/></li>
-              <button onClick={()=>{handleAddHouse(item._id)}} type="button" disabled={
-                user.payload.userCopy.houses.some((house)=>house._id===item._id)
+              <li>Photo: <img src={item.photo} alt="photo" /></li>
+              <button onClick={() => { handleAddHouse(item._id) }} className="btn" type="button" disabled={
+                user.payload.userCopy.houses.some((house) => house._id === item._id)
               }>Rent</button>
             </ul>
           ))}

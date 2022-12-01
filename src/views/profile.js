@@ -13,7 +13,7 @@ function Profile(props) {
   const [changedEmail, setChangedEmail] = useState("");
   const [changedSurname, setChangedSurname] = useState("");
   const [changedName, setChangedName] = useState("");
-  const [changedAge, setChangedAge] = useState("");
+  const [changedAge, setChangedAge] = useState(0);
   const [changedPicture, setChangedPicture] = useState("");
   const [changedLocation, setChangedLocation] = useState("");
   const [file, setFile] = useState(null);
@@ -56,10 +56,9 @@ function Profile(props) {
     const parsed = result.json();
     updateUser();
   };
-  const handleDeleteAnimal = async (id) => {
-    await axios.delete(`http://localhost:5005/animals/delete/${id}`, {
-      params: { id }
-  });
+  const handleDeleteAnimal = async (animalid) => {
+    const id = user.payload.userCopy._id;
+    await axios.delete(`http://localhost:5005/animals/animal/${animalid}/delete/${id}`, );
     updateUser();
 
 
@@ -209,8 +208,8 @@ function Profile(props) {
           {user &&
             user.payload.userCopy.houses.map((house) => {
               return (
-                <ul key={house._id}>
-                  <li>{house.name}</li>
+               <ul key={house._id}>
+                  <li key={house._id}>{house.name}</li>
                 </ul>
               );
             })}

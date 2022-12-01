@@ -12,19 +12,24 @@ function Navbar() {
       <Link to="/">
         <button className="btn">Home</button>
       </Link>
-      <img src={HomeImage} style={{ width: '300px', marginTop: 60, marginBottom: 205, }} alt="navbar-home" />
+      <div className="logo">
+        <img src={HomeImage} alt="navbar-home" />
+      </div>
       {isLoggedIn && (
         <>
           <Link to={`/auth/profile`}>
             <button className="btn">Profile</button>
           </Link>
-          <button className="btn" onClick={logOutUser}>Logout</button>
+
           <Link to={`/auth/main`}>
             <button className="btn">Rent a house</button>
           </Link>
           <Link to={`/auth/animal`}>
             <button className="btn">Add Pet</button>
           </Link>
+          <button className="btn" onClick={logOutUser}>
+            Logout
+          </button>
         </>
       )}
       {!isLoggedIn && (

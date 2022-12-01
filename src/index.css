@@ -16,30 +16,7 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.logo {
-  text-align: left;
-  width: 20%;
-  position: static;
-  flex-direction: column;
-}
-button {
-  background-color: #bba8ad;
-  color: rgb(133, 64, 64);
-  padding: 5px 15px;
-  border: 3px solid rgb(164, 142, 145);
-  font-size: 15px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  font-weight: 500;
-  margin: 5px 6px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 10px;
-}
-.button:hover {
-  background-color: #a66e85;
-  transition: 0.4s;
-}
+
 h1 {
   font-family: sans-serif;
   color: rgb(79, 45, 45);
@@ -47,19 +24,24 @@ h1 {
 
 img {
   border-radius: 8px;
-  border: 4px;
+  border: 1px;
   width: 70%;
   max-width: 100%;
 }
 
 .image {
-  margin: 3%;
+  margin: 1%;
   position: relative;
+}
+
+.logo {
+  max-width: 100%;
+  width: 20%;
 }
 .text {
   position: absolute;
   top: 60px;
-  left: 370px;
+  left: 400px;
   background-color: rgb(246, 209, 209);
 }
 
@@ -82,4 +64,33 @@ img {
   padding: 10px;
 }
 
-li { list-style-type: none}
+li {
+  list-style-type: none;
+}
+
+.footerlogo {
+  display: flex;
+  max-width: 100%;
+  width: 10%;
+  justify-content: center;
+}
+
+.footercontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  display: flex;
+
+  margin: 10px;
+}
+
+.housephoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  padding: 20px;
+}

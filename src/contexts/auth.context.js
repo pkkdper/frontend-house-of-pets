@@ -17,12 +17,10 @@ function AuthProviderWrapper(props) {
     //  <==  ADD
     localStorage.setItem("authToken", token);
   };
-
   const getToken = () => {
     const storedToken = localStorage.getItem("authToken");
     return storedToken;
   };
-
   const authenticateUser = () => {
     //  <==  ADD
     // Get the stored token from the localStorage
@@ -32,7 +30,7 @@ function AuthProviderWrapper(props) {
     if (storedToken) {
       // We must send the JWT token in the request's "Authorization" Headers
       axios
-        .get(`${API_URL}/auth/verify`, {
+        .get(`${process.env.REACT_APP_BACKEND_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
@@ -76,7 +74,7 @@ function AuthProviderWrapper(props) {
 
   const updateUser = () => {
     axios
-      .get(`http://localhost:5005/auth/profile/${userId}`)
+      .get(`${process.env.REACT_APP_BACKEND_URL}/auth/profile/${userId}`)
       .then((response) => {
         setUser({ payload: { userCopy: response.data } });
       })

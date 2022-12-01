@@ -15,7 +15,7 @@ const {user, updateUser} = useContext(AuthContext)
 const navigate = useNavigate()
 
 const fetchHouses = () => {
-  axios.get("http://localhost:5005/house/houses")
+  axios.get(`${process.env.REACT_APP_BACKEND_URL}/house/houses`)
   .then((response) => {
     //console.log(response.data); // get all the houses from the DB
     setAllData(response.data); // this is the way to change the value of allData
@@ -31,7 +31,7 @@ const fetchHouses = () => {
   console.log("All data", allData);
 
   const handleAddHouse = async (id) => {
-await axios.get(`http://localhost:5005/house/houses/renthouse/${id}/user/${user.payload.userCopy._id}`) ; 
+await axios.get(`${process.env.REACT_APP_BACKEND_URL}/house/houses/renthouse/${id}/user/${user.payload.userCopy._id}`) ; 
 updateUser()
 // setIsDisabled(true)
 // navigate("/auth/profile")
@@ -57,9 +57,6 @@ updateUser()
             if (item.pricepernight === search) {
               return item;
             }
-            if (item.photo === search) {
-              return item;
-            }
             if (item.maxnumberofdays === search) {
               return item;
             }
@@ -67,6 +64,18 @@ updateUser()
               return item;
             }
             if (item.type === search) {
+              return item;
+            }
+            if (item.animaltype === search) {
+              return item;
+            }
+            if (item.maxsizeofanimal === search) {
+              return item;
+            }
+            if (item.maxnumberofanimals === search) {
+              return item;
+            }
+            if (item.photo === search) {
               return item;
             }
           })
@@ -78,6 +87,10 @@ updateUser()
               <li>Max numbers of days: {item.maxnumberofdays}</li>
               <li>Rooms: {item.rooms}</li>
               <li>Type: {item.type}</li>
+              <li>Animal Type: {item.animaltype}</li>
+              <li>Max size of animal: {item.maxsizeofanimal}</li>
+              <li>Max of number of animals: {item.maxnumberofanimals}</li>
+              <li>Photo: <img src={item.photo} alt="photo"/></li>
               <button onClick={()=>{handleAddHouse(item._id)}} type="button" disabled={
                 user.payload.userCopy.houses.some((house)=>house._id===item._id)
               }>Rent</button>

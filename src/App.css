@@ -1,10 +1,22 @@
 .App {
   text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: none;
+  display: flex;
+  cursor: pointer;
+  flex-direction: column;
+  color: rgb(28, 28, 28);
+  font-size: 1.5rem;
+  font-family: 'monospace';
+  background-color: #fbf9fe;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='32' viewBox='0 0 16 32'%3E%3Cg fill='%23ffd9d9' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 24h4v2H0v-2zm0 4h6v2H0v-2zm0-8h2v2H0v-2zM0 0h4v2H0V0zm0 4h2v2H0V4zm16 20h-6v2h6v-2zm0 4H8v2h8v-2zm0-8h-4v2h4v-2zm0-20h-6v2h6V0zm0 4h-4v2h4V4zm-2 12h2v2h-2v-2zm0-8h2v2h-2V8zM2 8h10v2H2V8zm0 8h10v2H2v-2zm-2-4h14v2H0v-2zm4-8h6v2H4V4zm0 16h6v2H4v-2zM6 0h2v2H6V0zm0 24h2v2H6v-2z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+  color: rgb(87, 82, 83);
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -40,7 +52,9 @@
 
 form {
   border: none;
-  padding: 30px;
+  padding: 0px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,7 +69,7 @@ form {
   flex-direction: column;
   color: rgb(223, 76, 91);
   font-size: 1.5rem;
-  font-family: "system-ui";
+
   background-color: #fbf9fe;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='32' viewBox='0 0 16 32'%3E%3Cg fill='%23ffd9d9' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 24h4v2H0v-2zm0 4h6v2H0v-2zm0-8h2v2H0v-2zM0 0h4v2H0V0zm0 4h2v2H0V4zm16 20h-6v2h6v-2zm0 4H8v2h8v-2zm0-8h-4v2h4v-2zm0-20h-6v2h6V0zm0 4h-4v2h4V4zm-2 12h2v2h-2v-2zm0-8h2v2h-2V8zM2 8h10v2H2V8zm0 8h10v2H2v-2zm-2-4h14v2H0v-2zm4-8h6v2H4V4zm0 16h6v2H4v-2zM6 0h2v2H6V0zm0 24h2v2H6v-2z'/%3E%3C/g%3E%3C/svg%3E");
 }
@@ -67,9 +81,15 @@ form {
   display: flex;
   flex-direction: space-between;
   align-items: center;
-  font-family: "system-ui";
+
   color: rgb(65, 62, 62);
   cursor: pointer;
+  margin-left: 50px;
+  margin-right: 50px;
+  margin-bottom: 10px;
+  margin-top: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .select-styling {
@@ -79,8 +99,9 @@ form {
   display: flex;
   flex-direction: space-between;
   align-items: center;
-  font-family: "georgia";
+
   color: rgb(65, 62, 62);
+  font-size: 1rem;
 }
 
 .btn {
@@ -88,8 +109,9 @@ form {
   color: white;
   position: relative;
   font-size: 14px;
+
   margin-left: 20px;
-  letter-spacing: 3px;
+  letter-spacing: 0.1px;
   height: 2.5em;
   padding: 0 0.8em;
   border: none;
@@ -98,16 +120,29 @@ form {
   overflow: hidden;
   border-radius: 5px;
   cursor: pointer;
+  margin-bottom: 2px;
+  margin-top: 2px;
+
+
+
 }
 
 .h4 {
-  font-family: "system-ui";
+  margin-left: 500px;
+  margin-right: 500px;
+
+  color: rgb(223, 76, 91);
+  align-items: center;
+  margin-top: 30px;
+  background: linear-gradient(50deg, rgb(232, 227, 229) 20%, rgb(114, 113, 113) 100%);
+}
+
+.p {
+
   color: rgb(65, 62, 62);
   align-items: center;
   margin-top: 30px;
-  background: linear-gradient(
-    50deg,
-    rgb(232, 227, 229) 20%,
-    rgb(223, 76, 91) 100%
-  );
+  background: linear-gradient(50deg,
+      rgb(232, 227, 229) 20%,
+      rgb(223, 76, 91) 100%);
 }

@@ -102,7 +102,7 @@ const Animal = (props) => {
         <p>Create the profile of your pet:</p>
       </div>
       <form>
-        <div className="form-styling">
+        <div className="select-styling">
           <label>Name: </label>
           <input type="text" value={name} onChange={handleChange} />
 
@@ -113,6 +113,7 @@ const Animal = (props) => {
             id="demo-simple-select"
             value={type}
             label="Type"
+            size="small"
             onChange={handleTypeChange}
           >
             <MenuItem value={"Cat"}>Cat</MenuItem>
@@ -122,10 +123,13 @@ const Animal = (props) => {
             <label>Size: </label>
             <FormLabel id="demo-simple-select-label"></FormLabel>
             <Select
+
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={size}
               label="Size"
+              size="small"
+
               onChange={handleSizeChange}
             >
               <MenuItem value={"Small"}>Small</MenuItem>

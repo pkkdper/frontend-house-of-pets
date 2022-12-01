@@ -95,9 +95,12 @@ export default function App() {
               <li>Max size of animal: {item.maxsizeofanimal}</li>
               <li>Max of number of animals: {item.maxnumberofanimals}</li>
               <li>
-                Photo: <img src={item.photo} alt="photo" />
+                <div className="housephoto">
+                  <img src={item.photo} alt="photo" />
+                </div>
               </li>
               <button
+                className="btn"
                 onClick={() => {
                   handleAddHouse(item._id);
                 }}

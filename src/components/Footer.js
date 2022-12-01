@@ -10,9 +10,8 @@ import FooterImage from "../assets/footer.png";
 const useStyles = createStyles((theme) => ({
   footer: {
     marginTop: 120,
-    borderTop: `1px solid ${
-      theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
+    borderTop: `1px solid ${theme.colorScheme === "dark" ? theme.colors.dark[5] : theme.colors.gray[2]
+      }`,
   },
 
   inner: {

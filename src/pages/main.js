@@ -43,7 +43,7 @@ export default function App() {
 
   return (
     <div className="App">
-      <div 
+      <div
       // style={{ margin: "0 auto", marginTop: "10%" }}
       >
         <Navbar />
@@ -109,7 +109,7 @@ export default function App() {
                     handleAddHouse(item._id);
                   }}
                   type="button"
-                  disabled={user.payload.userCopy.houses.some(
+                  disabled={user?.payload?.userCopy?.houses?.some(
                     (house) => house._id === item._id
                   )}
                 >

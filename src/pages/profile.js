@@ -22,7 +22,7 @@ function Profile(props) {
     setFile(event.target.files[0]);
   }
   useEffect(() => {
-    if (!isLoading) {
+    if (!isLoading && user) {
       setChangedUsername(user.payload.userCopy.username);
       setChangedEmail(user.payload.userCopy.email);
       setChangedSurname(user.payload.userCopy.surname);
@@ -239,13 +239,14 @@ function Profile(props) {
                       <li>Not Vaccinated</li>
                     )}
                     {/* {animal.photo ? ( */}
-                      <img src={animal.picture} />
+                    <img src={animal.picture} />
                     {/* // ) : ( */}
-                      {/* <li>No photo</li> */}
+                    {/* <li>No photo</li> */}
                     {/* // )} */}
                   </ul>
                   <button
-                    type="button" className="btn deleteBtn"
+                    type="button"
+                    className="btn deleteBtn"
                     onClick={() => {
                       handleDeleteAnimal(animal._id);
                     }}
@@ -297,8 +298,6 @@ function Profile(props) {
                       <img src={user.payload.userCopy.picture} className="imageProfile" />
                       )} */}
         {/* onerror="if (this.src != 'error.jpg') this.src = 'error.jpg';" */}
-
-
       </div>
       <div className="footer">
         <Footer />

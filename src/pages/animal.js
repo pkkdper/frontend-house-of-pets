@@ -16,23 +16,22 @@ import {
 import { borderLeft } from "@mui/system";
 import { TextInput } from "@mantine/core";
 
+const animalSizes = [
+  "Small" ,
+  "Medium" ,
+  "Big" ,
+  "Giant" ,
+];
+
 const Animal = (props) => {
-  const { user } = useContext(AuthContext);
+  const { user, getToken, updateUser } = useContext(AuthContext);
   const [name, setName] = useState("");
-  const [type, setType] = useState("");
-  const [size, setSize] = useState("");
+  const [type, setType] = useState("Cat");
+  const [size, setSize] = useState(animalSizes[0]);
   const [medical, setMedical] = useState("");
   const [passport, setPassport] = useState(false);
   const [vaccines, setVaccines] = useState(false);
   const [picture, setPicture] = useState("");
-  const { getToken, updateUser } = useContext(AuthContext);
-
-  const animalSize = [
-    { size: "Small" },
-    { size: "Medium" },
-    { size: "Big" },
-    { size: "Giant" },
-  ];
 
   const navigate = useNavigate();
   const handleSubmit = async (event) => {
@@ -51,8 +50,27 @@ const Animal = (props) => {
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    // setShowanimal(event.target.value)
+    console.log(response)
+
+    const image = event.target.imageUrl.files[0];
+    const formData = new FormData();
+    formData.append("imageUrl", image);
+    const result = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/animals/${response.data._id}/image`,
+      {
+        method: "PUT",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: formData,
+      }
+    );
+    const parsed = await result.json();
+    console.log(parsed);
+    setPicture(parsed);
     updateUser();
+    // setShowanimal(event.target.value)
+    // updateUser();
     // const parsed = response.data;
     navigate("/auth/profile");
     // if (parsed.status === 200) {
@@ -84,12 +102,12 @@ const Animal = (props) => {
 
   // function to update passport state of the animal
   const handlePassportChange = (event) => {
-    setPassport(event.target.value);
+    setPassport(event.target.checked);
   };
 
   // function to update vaccines state of the animal
   const handleVaccinesChange = (event) => {
-    setVaccines(event.target.value);
+    setVaccines(event.target.checked);
   };
 
   // function to update picture state of the animal
@@ -124,7 +142,7 @@ const Animal = (props) => {
         <div className="h4">
           <p>Create the profile of your pet:</p>
         </div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="select-styling">
             <label>Name: </label>
             <input type="text" value={name} onChange={handleChange}  />
@@ -153,10 +171,7 @@ const Animal = (props) => {
                 size="small"
                 onChange={handleSizeChange}
               >
-                <option value={"Small"}>Small</option>
-                <option value={"Medium"}>Medium</option>
-                <option value={"Big"}>Big</option>
-                <option value={"Giant"}>Giant</option>
+                {animalSizes.map(size => <option key={size} value={size}>{size}</option>)}
               </select>
             </div>
 
@@ -190,14 +205,8 @@ const Animal = (props) => {
               value={picture}
               onChange={handlePictureChange}
             /> */}
-            <Link to="/profile">
-              <button onClick={handleSubmit} className="btn" type="submit">
-                Submit
-              </button>
-            </Link>
           </div>
-        </form>
-        <form onSubmit={handlePictureChange}>
+        {/* <form onSubmit={handlePictureChange}> */}
         <input
               id="picture"
               type="file"
@@ -205,7 +214,7 @@ const Animal = (props) => {
               // value={picture}
               name="imageUrl"
             />
-            <button type="submit">Upload</button>
+            <button type="submit">Submit</button>
         </form>
       </div>
       <div className="footer">

@@ -32,15 +32,14 @@ function Navbar() {
                 <button className="btn">Add Pet</button>
               </Link>
             </div>
-            <div className="rightSideNav">
+            <div className="rightSideNav"><button className="btn" onClick={logOutUser}>
+                Logout
+              </button>
+              <p>{user.payload.userCopy.username}</p>
               <img
                 src={user.payload.userCopy.picture}
                 className="imageProfileNav"
               />
-              <p>{user.payload.userCopy.username}</p>
-              <button className="btn" onClick={logOutUser}>
-                Logout
-              </button>
             </div>
           </>
         )}

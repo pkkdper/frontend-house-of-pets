@@ -228,12 +228,12 @@ function Profile(props) {
                     <li>Name: {animal.name}</li>
                     <li>Type: {animal.type}</li>
                     <li>Size: {animal.size}</li>
-                    {animal.passport == true ? (
+                    {animal.passport ? (
                       <li>Has Passport</li>
                     ) : (
                       <li>Doesn't have passport</li>
                     )}
-                    {animal.vaccines == true ? (
+                    {animal.vaccines ? (
                       <li>Vaccinated</li>
                     ) : (
                       <li>Not Vaccinated</li>

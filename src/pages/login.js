@@ -52,6 +52,7 @@ const LoginPage = (props) => {
     <>
       <Navbar />
       <div className="formBox">
+        <div className="form">
         <form className="loginstyle" onSubmit={handleSubmit}>
           {error?.message && <p>{error.message}</p>}
           <label> Username</label>
@@ -89,7 +90,7 @@ const LoginPage = (props) => {
               Login
             </button>
           </div>
-        </form>
+        </form></div>
       </div>
       <div className="footer">
         <Footer />

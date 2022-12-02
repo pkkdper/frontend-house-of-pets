@@ -142,13 +142,13 @@ const Animal = (props) => {
         <div className="h4">
           <p>Create the profile of your pet:</p>
         </div>
+        <div className="form addAnimal" id="addanimal">
         <form onSubmit={handleSubmit}>
           <div className="select-styling">
-            <label>Name: </label>
-            <input type="text" value={name} onChange={handleChange}  />
+            <label className="label">Name: </label>
+            <input type="text" value={name} onChange={handleChange}  className="input"/>
 
-            <label>Type: </label>
-            <FormLabel id="demo-simple-select-label"></FormLabel>
+            <label className="label">Type: </label>
             <select
               // labelId="demo-simple-select-label"
               id="demo-simple-select"
@@ -161,7 +161,7 @@ const Animal = (props) => {
               <option value={"Dog"}>Dog</option>
             </select>
             <div className="select-styling">
-              <label>Size: </label>
+              <label className="label">Size: </label>
               {/* <FormLabel id="demo-simple-select-label"></FormLabel> */}
               <select
                 // labelId="demo-simple-select-label"
@@ -175,18 +175,18 @@ const Animal = (props) => {
               </select>
             </div>
 
-            <label>Medical:</label>
+            <label className="label">Medical:</label>
             <input type="text" value={medical} onChange={handleMedicalChange}  placeholder="Medical conditions"
-      label="Medical conditions" />
-            <label>Passport:</label>
-            <input
+      label="Medical conditions" className="input"/>
+            <label className="label">Passport:</label>
+            <input className="input"
               type="checkbox"
               value={passport}
               onChange={handlePassportChange}
 
             />
-            <label>Vaccines:</label>
-            <input
+            <label className="label">Vaccines:</label>
+            <input className="input"
               type="checkbox"
               value={vaccines}
               onChange={handleVaccinesChange}
@@ -207,15 +207,15 @@ const Animal = (props) => {
             /> */}
           </div>
         {/* <form onSubmit={handlePictureChange}> */}
-        <input
+        <label id="labelimg" className="label"><p>Choose a Picture: </p><input className="input"
               id="picture"
               type="file"
               accept="image/png, image/jpg"
               // value={picture}
               name="imageUrl"
-            />
-            <button type="submit">Submit</button>
-        </form>
+            /></label>
+            <button type="submit" className="btn">Submit</button>
+        </form></div>
       </div>
       <div className="footer">
         <Footer />

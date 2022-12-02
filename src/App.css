@@ -62,6 +62,69 @@ form {
   align-items: center;
 }
 
+.signupstyle{
+width: 400px;
+}
+.loginstyle{
+width: 400px
+}
+#addanimal {
+  width: 700px;  margin-left: 590px;
+  /* right: 800px; */
+}
+/* .addanimal {
+
+} */
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  margin: 10px;
+  padding: 10px;
+}
+.form input {
+  height: 30px;
+}
+.form .input {
+  height: 30px;
+  margin-right: 50px;
+  margin-top: 20px;
+}
+.form .label {
+  margin-top: 20px;
+  margin-left: 40px;
+}
+#picture {
+  margin-left: 175px;
+}
+.formbox p {
+  width: 600px;
+}
+#labelimg p{
+  margin-left: -50px;
+}
+select {
+  margin-top: 20px;
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 4px;
+  padding: 10px 30px 10px 20px;
+  background-color: #ffffff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+/* .addAnimal {
+  width: 50%;
+
+} */
+
+/* .addAnimal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
 .animal {
   margin: 0px;
   padding: 0px;
@@ -76,7 +139,7 @@ form {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='32' viewBox='0 0 16 32'%3E%3Cg fill='%23ffd9d9' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 24h4v2H0v-2zm0 4h6v2H0v-2zm0-8h2v2H0v-2zM0 0h4v2H0V0zm0 4h2v2H0V4zm16 20h-6v2h6v-2zm0 4H8v2h8v-2zm0-8h-4v2h4v-2zm0-20h-6v2h6V0zm0 4h-4v2h4V4zm-2 12h2v2h-2v-2zm0-8h2v2h-2V8zM2 8h10v2H2V8zm0 8h10v2H2v-2zm-2-4h14v2H0v-2zm4-8h6v2H4V4zm0 16h6v2H4v-2zM6 0h2v2H6V0zm0 24h2v2H6v-2z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-.form-styling {
+/* .form-styling {
   margin: 0px;
   border: none;
   padding: 100px;
@@ -92,20 +155,25 @@ form {
   margin-top: 60px;
   display: flex;
   align-items: center;
-}
+} */
 
 .select-styling {
   margin: 0px;
   border: none;
   padding: 3px;
-  display: flex;
   flex-direction: space-between;
   align-items: center;
-
+flex-wrap: wrap;
   color: rgb(65, 62, 62);
   font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 1000px;
 }
+/* label input {
 
+} */
 .btn {
   background-color: rgb(223, 76, 91);
   color: white;
@@ -128,20 +196,24 @@ form {
 }
 
 .h4 {
-  margin-left: 500px;
-  margin-right: 500px;
-
+  margin-left: 100px;
+  margin-right: 100px;
+font-size: 30px;
+font-weight: 600;
   color: rgb(223, 76, 91);
   align-items: center;
   margin-top: 30px;
-  background: linear-gradient(
+  /* background:  */
+  /* linear-gradient(
     50deg,
-    rgb(232, 227, 229) 20%,
-    rgb(114, 113, 113) 100%
-  );
+    rgb(232, 227, 229) 20%, */
+    /* rgb(114, 113, 113) 100% */
+  /* ); */
 }
-
-.p {
+/* #labelimg{
+  margin-left: -10px;
+} */
+/* .p {
   color: rgb(65, 62, 62);
   align-items: center;
   margin-top: 30px;
@@ -150,7 +222,7 @@ form {
     rgb(232, 227, 229) 20%,
     rgb(223, 76, 91) 100%
   );
-}
+} */
 .imageProfile {
   border-radius: 50%;
   object-fit: cover;

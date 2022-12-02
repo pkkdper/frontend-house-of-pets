@@ -99,26 +99,26 @@ function Signup() {
 
           <form className="signupstyle">
             {/* Labels and inputs for form data */}
-            <label className="label">Name</label>
+            <label >Name</label>
             <input
               onChange={handleName}
-              className="input"
+              
               value={username}
               type="text"
             />
 
-            <label className="label">Email</label>
+            <label >Email</label>
             <input
               onChange={handleEmail}
-              className="input"
+              
               value={email}
               type="email"
             />
 
-            <label className="label">Password</label>
+            <label >Password</label>
             <input
               onChange={handlePassword}
-              className="input"
+              
               value={password}
               type="password"
             />

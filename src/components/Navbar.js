@@ -35,7 +35,7 @@ function Navbar() {
             <div className="rightSideNav"><button className="btn" onClick={logOutUser}>
                 Logout
               </button>
-              <p>{user.payload.userCopy.username}</p>
+              {/* <p>{user.payload.userCopy.username}</p> */}
               <img
                 src={user.payload.userCopy.picture}
                 className="imageProfileNav"

@@ -14,8 +14,10 @@ import {
   GlobalStyles,
 } from "@mui/material";
 import { borderLeft } from "@mui/system";
+import { TextInput } from "@mantine/core";
 
 const Animal = (props) => {
+  const { user } = useContext(AuthContext);
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [size, setSize] = useState("");
@@ -91,9 +93,29 @@ const Animal = (props) => {
   };
 
   // function to update picture state of the animal
-  const handlePictureChange = (event) => {
-    setPicture(event.target.value);
+  const handlePictureChange = async (event) => {
+    event.preventDefault();
+    console.log(user.payload.userCopy.animals)
+    const id = user.payload.userCopy.animals._id;
+    const image = event.target.imageUrl.files[0];
+    const formData = new FormData();
+    formData.append("imageUrl", image);
+    const result = await fetch(
+      `${process.env.REACT_APP_BACKEND_URL}/animal/${id}/image`,
+      {
+        method: "POST",
+        // headers: {
+        //   "Content-Type": "application/json",
+        // },
+        body: formData,
+      }
+    );
+    const parsed = await result.json();
+    console.log(parsed);
+    setPicture(parsed);
+    updateUser();
   };
+      // setPicture(event.target.value);
 
   return (
     <div className="animal">
@@ -105,72 +127,85 @@ const Animal = (props) => {
         <form>
           <div className="select-styling">
             <label>Name: </label>
-            <input type="text" value={name} onChange={handleChange} />
+            <input type="text" value={name} onChange={handleChange}  />
 
             <label>Type: </label>
             <FormLabel id="demo-simple-select-label"></FormLabel>
-            <Select
-              labelId="demo-simple-select-label"
+            <select
+              // labelId="demo-simple-select-label"
               id="demo-simple-select"
               value={type}
               label="Type"
               size="small"
               onChange={handleTypeChange}
             >
-              <MenuItem value={"Cat"}>Cat</MenuItem>
-              <MenuItem value={"Dog"}>Dog</MenuItem>
-            </Select>
+              <option value={"Cat"}>Cat</option>
+              <option value={"Dog"}>Dog</option>
+            </select>
             <div className="select-styling">
               <label>Size: </label>
-              <FormLabel id="demo-simple-select-label"></FormLabel>
-              <Select
-                labelId="demo-simple-select-label"
+              {/* <FormLabel id="demo-simple-select-label"></FormLabel> */}
+              <select
+                // labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 value={size}
                 label="Size"
                 size="small"
                 onChange={handleSizeChange}
               >
-                <MenuItem value={"Small"}>Small</MenuItem>
-                <MenuItem value={"Medium"}>Medium</MenuItem>
-                <MenuItem value={"Big"}>Big</MenuItem>
-                <MenuItem value={"Giant"}>Giant</MenuItem>
-              </Select>
+                <option value={"Small"}>Small</option>
+                <option value={"Medium"}>Medium</option>
+                <option value={"Big"}>Big</option>
+                <option value={"Giant"}>Giant</option>
+              </select>
             </div>
 
             <label>Medical:</label>
-            <input type="text" value={medical} onChange={handleMedicalChange} />
+            <input type="text" value={medical} onChange={handleMedicalChange}  placeholder="Medical conditions"
+      label="Medical conditions" />
             <label>Passport:</label>
             <input
               type="checkbox"
               value={passport}
               onChange={handlePassportChange}
+
             />
             <label>Vaccines:</label>
             <input
               type="checkbox"
               value={vaccines}
               onChange={handleVaccinesChange}
+
             />
-            <label>Picture:</label>
+            {/* <label>Picture:</label>
             <input
               id="picture"
               type="file"
               value={picture}
               onChange={handlePictureChange}
-            />
+            /> */}
 
-            <input
+            {/* <input
               type="picture"
               value={picture}
               onChange={handlePictureChange}
-            />
+            /> */}
             <Link to="/profile">
               <button onClick={handleSubmit} className="btn" type="submit">
                 Submit
               </button>
             </Link>
           </div>
+        </form>
+        <form onSubmit={handlePictureChange}>
+        <input
+              id="picture"
+              type="file"
+              accept="image/png, image/jpg"
+              // value={picture}
+              name="imageUrl"
+            />
+            <button type="submit">Upload</button>
         </form>
       </div>
       <div className="footer">

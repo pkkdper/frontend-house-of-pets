@@ -4,7 +4,6 @@
   padding: 0px;
   border: none; */
   display: flex;
-  cursor: pointer;
   flex-direction: column;
   color: rgb(28, 28, 28);
   font-size: 1.5rem;
@@ -124,8 +123,8 @@ form {
   overflow: hidden;
   border-radius: 5px;
   cursor: pointer;
-  margin-bottom: 2px;
-  margin-top: 2px;
+  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .h4 {
@@ -171,7 +170,7 @@ form {
 
 .footer {
   background-color: rgba(0, 0, 0, 0.5);
-  display: inline-block;
+  /* display: inline-block; */
   margin-top: 100px
 }
 
@@ -234,3 +233,27 @@ form {
 /* .leftSideNav {
   margin-right:-300px
 } */
+
+/* select option {
+
+} */
+form {
+  /* box-sizing: border-box; */
+  padding: 2rem;
+  background-color: hsl(0, 0%, 100%);
+  display: flex;
+  /* grid-template-columns: 1fr 1fr; */
+  gap: 1rem;
+}
+.list {
+  margin-left: -40px;
+  position: relative;
+}
+.deleteBtn {
+  margin-right: -25px;
+}
+.list button {
+  position: absolute;
+left: 400px;
+top: 100px;
+}

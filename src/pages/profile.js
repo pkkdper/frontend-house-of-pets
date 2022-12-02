@@ -126,7 +126,7 @@ function Profile(props) {
   const handleDeleteAnimal = async (animalid) => {
     const id = user.payload.userCopy._id;
     await axios.delete(
-      `http://localhost:5005/animals/animal/${animalid}/delete/${id}`
+      `${process.env.REACT_APP_BACKEND_URL}/animals/animal/${animalid}/delete/${id}`
     );
     updateUser();
 
@@ -223,7 +223,7 @@ function Profile(props) {
           {user &&
             user.payload.userCopy.animals.map((animal) => {
               return (
-                <div key={animal._id}>
+                <div key={animal._id} className="list">
                   <ul>
                     <li>Name: {animal.name}</li>
                     <li>Type: {animal.type}</li>
@@ -245,7 +245,7 @@ function Profile(props) {
                     )}
                   </ul>
                   <button
-                    type="button"
+                    type="button" className="btn deleteBtn"
                     onClick={() => {
                       handleDeleteAnimal(animal._id);
                     }}
@@ -265,7 +265,7 @@ function Profile(props) {
             {user &&
               user.payload.userCopy.houses.map((house) => {
                 return (
-                  <ul key={house._id}>
+                  <ul key={house._id} className="list">
                     <li key={house._id}>{house.name}</li>
                   </ul>
                 );

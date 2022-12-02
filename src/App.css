@@ -257,3 +257,6 @@ form {
 left: 400px;
 top: 100px;
 }
+input[type='file'] {
+  color: transparent;
+}

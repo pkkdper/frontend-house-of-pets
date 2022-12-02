@@ -238,11 +238,11 @@ function Profile(props) {
                     ) : (
                       <li>Not Vaccinated</li>
                     )}
-                    {animal.photo ? (
+                    {/* {animal.photo ? ( */}
                       <img src={animal.picture} />
-                    ) : (
-                      <li>No photo</li>
-                    )}
+                    {/* // ) : ( */}
+                      {/* <li>No photo</li> */}
+                    {/* // )} */}
                   </ul>
                   <button
                     type="button" className="btn deleteBtn"

@@ -14,9 +14,9 @@ function Navbar() {
       </div>
 
       <nav>
-        {/* <Link to="/">
+        <Link to="/">
           <button className="btn">Home</button>
-        </Link> */}
+        </Link>
 
         {isLoggedIn && (
           <>

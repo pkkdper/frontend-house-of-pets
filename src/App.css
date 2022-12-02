@@ -1,14 +1,17 @@
 .App {
   text-align: center;
-  margin: 0px;
+  /* margin: 0px;
   padding: 0px;
-  border: none;
+  border: none; */
   display: flex;
   cursor: pointer;
   flex-direction: column;
   color: rgb(28, 28, 28);
   font-size: 1.5rem;
-  font-family: 'monospace';
+  /* font-family: "monospace"; */
+  font-family: ff-tisa-sans-web-pro, sans-serif;
+font-style: normal;
+font-weight: 400;
   background-color: #fbf9fe;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='32' viewBox='0 0 16 32'%3E%3Cg fill='%23ffd9d9' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 24h4v2H0v-2zm0 4h6v2H0v-2zm0-8h2v2H0v-2zM0 0h4v2H0V0zm0 4h2v2H0V4zm16 20h-6v2h6v-2zm0 4H8v2h8v-2zm0-8h-4v2h4v-2zm0-20h-6v2h6V0zm0 4h-4v2h4V4zm-2 12h2v2h-2v-2zm0-8h2v2h-2V8zM2 8h10v2H2V8zm0 8h10v2H2v-2zm-2-4h14v2H0v-2zm4-8h6v2H4V4zm0 16h6v2H4v-2zM6 0h2v2H6V0zm0 24h2v2H6v-2z'/%3E%3C/g%3E%3C/svg%3E");
 }
@@ -111,6 +114,7 @@ form {
   font-size: 14px;
 
   margin-left: 20px;
+  margin-right: 20px;
   letter-spacing: 0.1px;
   height: 2.5em;
   padding: 0 0.8em;
@@ -122,9 +126,6 @@ form {
   cursor: pointer;
   margin-bottom: 2px;
   margin-top: 2px;
-
-
-
 }
 
 .h4 {
@@ -134,15 +135,22 @@ form {
   color: rgb(223, 76, 91);
   align-items: center;
   margin-top: 30px;
-  background: linear-gradient(50deg, rgb(232, 227, 229) 20%, rgb(114, 113, 113) 100%);
+  background: linear-gradient(
+    50deg,
+    rgb(232, 227, 229) 20%,
+    rgb(114, 113, 113) 100%
+  );
 }
 
 .p {
-
   color: rgb(65, 62, 62);
   align-items: center;
   margin-top: 30px;
-  background: linear-gradient(50deg, rgb(232, 227, 229) 20%, rgb(223, 76, 91) 100%);
+  background: linear-gradient(
+    50deg,
+    rgb(232, 227, 229) 20%,
+    rgb(223, 76, 91) 100%
+  );
 }
 .imageProfile {
   border-radius: 50%;
@@ -156,3 +164,73 @@ form {
   width: 120px;
   height: 120px;
 }
+
+/* .formBox {
+
+} */
+
+.footer {
+  background-color: rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  margin-top: 100px
+}
+
+.houses {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: baseline;
+	align-content: stretch;
+  justify-content: space-evenly;
+}
+.house {
+  max-width: 50%;
+  font-size: 17px;
+  /* margin: 0px, 10px, 0px, 10px; */
+  margin-right: 50px;
+  margin-left: 50px;
+  margin-top: 60px;
+  margin-bottom: 40px;
+  padding: 0;
+}
+.house img {
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+}
+.house li {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+.house button {
+  margin-top: 20px;
+  width: 100px;
+  height: 50px;
+  font-size: 18px
+}
+.name {
+  font-weight: 600;
+  font-size: 20px;
+}
+.navbar {
+
+  display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: baseline;
+	align-content: center;
+}
+.logo {
+  margin: auto
+}
+/* .rightSideNav {
+  display: flex; justify-content: flex-end
+} */
+/* nav {
+  display: flex;
+} */
+/* .leftSideNav {
+  margin-right:-300px
+} */

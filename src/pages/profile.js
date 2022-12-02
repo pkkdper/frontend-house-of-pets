@@ -83,11 +83,12 @@ function Profile(props) {
         },
         body: JSON.stringify({
           name: changedName,
-        email: changedEmail,
-       username: changedUsername,
-       location: changedLocation,
-       age: changedAge,
-       surname: changedSurname}),
+          email: changedEmail,
+          username: changedUsername,
+          location: changedLocation,
+          age: changedAge,
+          surname: changedSurname,
+        }),
       }
     );
     const parsed = await result.json();
@@ -121,7 +122,7 @@ function Profile(props) {
     );
     const parsed = result.json();
     updateUser();
-  }
+  };
   const handleDeleteAnimal = async (animalid) => {
     const id = user.payload.userCopy._id;
     await axios.delete(
@@ -148,140 +149,161 @@ function Profile(props) {
   return (
     <div className="App">
       <Navbar />
-      <div className="h4">
-        <p>Hello {user.payload.userCopy.username[0].toUpperCase() + user.payload.userCopy.username.substring(1)}!</p></div>
+      <div className="formBox">
+        <div className="h4">
+          <p>
+            Hello{" "}
+            {user.payload.userCopy.username[0].toUpperCase() +
+              user.payload.userCopy.username.substring(1)}
+            !
+          </p>
+        </div>
 
-      <form onSubmit={handleSubmitUser} encType="multipart/form-data">
-        <label>
-          Email:
-          <input
-            type="text"
-            onChange={(e) => setChangedEmail(e.target.value)}
-            name="email"
-            value={changedEmail}
-          />
-        </label>
-        <label>
-          Username:
-          <input
-            type="text"
-            onChange={(e) => setChangedUsername(e.target.value)}
-            name="username"
-            value={changedUsername}
-          />
-        </label>
-        <label>
-          Name:
-          <input
-            type="text"
-            placeholder="add your name"
-            name="name"
-            onChange={(e) => setChangedName(e.target.value)}
-            value={changedName}
-          />
-        </label>
-        <label>
-          Surname:
-          <input
-            type="text"
-            placeholder="add your surname"
-            name="surname"
-            onChange={(e) => setChangedSurname(e.target.value)}
-            value={changedSurname}
-          />
-        </label>
-        <label>
-          Location:
-          <input
-            type="text"
-            placeholder="add your location"
-            name="location"
-            onChange={(e) => setChangedLocation(e.target.value)}
-            value={changedLocation}
-          />
-        </label>
-        <label>
-          Age:
-          <input
-            type="number"
-            placeholder="add age"
-            name="age"
-            onChange={(e) => setChangedAge(e.target.value)}
-            value={changedAge}
-          />
-        </label>
-        {/* <label> */}
-        Animals:
-        {user &&
-          user.payload.userCopy.animals.map((animal) => {
-            return (
-              <div key={animal._id}>
-                <ul>
-                  <li>Name: {animal.name}</li>
-                  <li>Type: {animal.type}</li>
-                  <li>Size: {animal.size}</li>
-                  {animal.passport ? (
-                    <li>Has Passport</li>
-                  ) : (
-                    <li>Doesn't have passport</li>
-                  )}
-                  {animal.vaccines ? (
-                    <li>Vaccinated</li>
-                  ) : (
-                    <li>Not Vaccinated</li>
-                  )}
-                  {animal.photo ? (
-                    <img src={animal.picture} />
-                  ) : (
-                    <li>No photo</li>
-                  )}
-                </ul>
-                <button
-                  type="button"
-                  onClick={() => {
-                    handleDeleteAnimal(animal._id);
-                  }}
-                >
-                  Delete Animal
-                </button>
-              </div>
-            );
-          })}
-
-        <Link to="/auth/animal">
-          <button className="btn" type="button">
-            Add animal</button>
-        </Link>
-        <label>
-          Houses:
+        <form onSubmit={handleSubmitUser} encType="multipart/form-data">
+          <label>
+            Email:
+            <input
+              type="text"
+              onChange={(e) => setChangedEmail(e.target.value)}
+              name="email"
+              value={changedEmail}
+            />
+          </label>
+          <label>
+            Username:
+            <input
+              type="text"
+              onChange={(e) => setChangedUsername(e.target.value)}
+              name="username"
+              value={changedUsername}
+            />
+          </label>
+          <label>
+            Name:
+            <input
+              type="text"
+              placeholder="add your name"
+              name="name"
+              onChange={(e) => setChangedName(e.target.value)}
+              value={changedName}
+            />
+          </label>
+          <label>
+            Surname:
+            <input
+              type="text"
+              placeholder="add your surname"
+              name="surname"
+              onChange={(e) => setChangedSurname(e.target.value)}
+              value={changedSurname}
+            />
+          </label>
+          <label>
+            Location:
+            <input
+              type="text"
+              placeholder="add your location"
+              name="location"
+              onChange={(e) => setChangedLocation(e.target.value)}
+              value={changedLocation}
+            />
+          </label>
+          <label>
+            Age:
+            <input
+              type="number"
+              placeholder="add age"
+              name="age"
+              onChange={(e) => setChangedAge(e.target.value)}
+              value={changedAge}
+            />
+          </label>
+          {/* <label> */}
+          Animals:
           {user &&
-            user.payload.userCopy.houses.map((house) => {
+            user.payload.userCopy.animals.map((animal) => {
               return (
-                <ul key={house._id}>
-                  <li key={house._id}>{house.name}</li>
-                </ul>
+                <div key={animal._id}>
+                  <ul>
+                    <li>Name: {animal.name}</li>
+                    <li>Type: {animal.type}</li>
+                    <li>Size: {animal.size}</li>
+                    {animal.passport == true ? (
+                      <li>Has Passport</li>
+                    ) : (
+                      <li>Doesn't have passport</li>
+                    )}
+                    {animal.vaccines == true ? (
+                      <li>Vaccinated</li>
+                    ) : (
+                      <li>Not Vaccinated</li>
+                    )}
+                    {animal.photo ? (
+                      <img src={animal.picture} />
+                    ) : (
+                      <li>No photo</li>
+                    )}
+                  </ul>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleDeleteAnimal(animal._id);
+                    }}
+                  >
+                    Delete Animal
+                  </button>
+                </div>
               );
             })}
-        </label>
-        <button onClick={handleSubmit} className="btn" type="submit">Update</button>
-      </form>
-      <form onSubmit={handleSubmitPicture}>
-        <label htmlFor="img">
-          Choose a Picture:
-          <input
-            name="imageUrl"
-            accept="image/png, image/jpg"
-            type="file"
-            // style={{ display: "none" }}
-            id="img"
-            placeholder="add image"
-          />
-        </label>
-        <button type="submit">Upload</button>
-      </form>
-      <img src={user.payload.userCopy.picture} className="imageProfile"/>
-    </div>
+          <Link to="/auth/animal">
+            <button className="btn" type="button">
+              Add animal
+            </button>
+          </Link>
+          <label>
+            Houses:
+            {user &&
+              user.payload.userCopy.houses.map((house) => {
+                return (
+                  <ul key={house._id}>
+                    <li key={house._id}>{house.name}</li>
+                  </ul>
+                );
+              })}
+          </label>
+          <button onClick={handleSubmit} className="btn" type="submit">
+            Update
+          </button>
+        </form>
+        <form onSubmit={handleSubmitPicture}>
+          <label htmlFor="img">
+            Choose a Picture:
+            <input
+              name="imageUrl"
+              accept="image/png, image/jpg"
+              type="file"
+              // style={{ display: "none" }}
+              id="img"
+              placeholder="add image"
+            />
+          </label>
+          <button type="submit">Upload</button>
+        </form>
+        <img src={user.payload.userCopy.picture} className="imageProfile" />
 
+        {/* {user.payload.userCopy.picture !== "undefined" ? (
+                       <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.lewesac.co.uk%2Fabout-us%2Fcoaches-leaders%2Fattachment%2Fdefault-avatar&psig=AOvVaw22ZPLu-sMO2wHMzmtnOmPB&ust=1670018374900000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCKCDy7G12fsCFQAAAAAdAAAAABAE" className="imageProfile" />
+                    ) : (
+                      <img src={user.payload.userCopy.picture} className="imageProfile" />
+                      )} */}
+        {/* onerror="if (this.src != 'error.jpg') this.src = 'error.jpg';" */}
+
+
+      </div>
+      <div className="footer">
+        <Footer />
+      </div>
+    </div>
   );
 }
 

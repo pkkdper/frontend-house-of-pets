@@ -89,46 +89,50 @@ function Signup() {
   return (
     <>
       <Navbar />
-      <div className="form">
-        {/* Calling to the methods */}
-        <div className="messages">
-          {errorMessage()}
-          {successMessage()}
-        </div>
-
-        <form className="signupstyle">
-          {/* Labels and inputs for form data */}
-          <label className="label">Name</label>
-          <input
-            onChange={handleName}
-            className="input"
-            value={username}
-            type="text"
-          />
-
-          <label className="label">Email</label>
-          <input
-            onChange={handleEmail}
-            className="input"
-            value={email}
-            type="email"
-          />
-
-          <label className="label">Password</label>
-          <input
-            onChange={handlePassword}
-            className="input"
-            value={password}
-            type="password"
-          />
-          <div className="container">
-            <button onClick={handleSubmit} className="btn" type="submit">
-              Submit
-            </button>
+      <div className="formBox">
+        <div className="form">
+          {/* Calling to the methods */}
+          <div className="messages">
+            {errorMessage()}
+            {successMessage()}
           </div>
-        </form>
+
+          <form className="signupstyle">
+            {/* Labels and inputs for form data */}
+            <label className="label">Name</label>
+            <input
+              onChange={handleName}
+              className="input"
+              value={username}
+              type="text"
+            />
+
+            <label className="label">Email</label>
+            <input
+              onChange={handleEmail}
+              className="input"
+              value={email}
+              type="email"
+            />
+
+            <label className="label">Password</label>
+            <input
+              onChange={handlePassword}
+              className="input"
+              value={password}
+              type="password"
+            />
+            <div className="container">
+              <button onClick={handleSubmit} className="btn" type="submit">
+                Submit
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
-      <Footer />
+      <div className="footer">
+        <Footer />
+      </div>
     </>
   );
 }

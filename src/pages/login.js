@@ -51,45 +51,49 @@ const LoginPage = (props) => {
   return (
     <>
       <Navbar />
-      <form className="loginstyle" onSubmit={handleSubmit}>
-        {error?.message && <p>{error.message}</p>}
-        <label> Username</label>
-        <input
-          className="TextInput"
-          label="Username"
-          variant="filled"
-          size="sm"
-          withAsterisk
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
-          required
-        />
-        <label>Password</label>
-        <input
-          className="PasswordInput"
-          label="Password"
-          type="password"
-          variant="filled"
-          size="xl"
-          withAsterisk
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          required
-        />
-        <div className="container">
-          <button
-            className="btn"
-            type="submit"
-            variant="light"
-            color="cyan"
-            size="md"
-            uppercase
-          >
-            Login
-          </button>
-        </div>
-      </form>
-      <Footer />
+      <div className="formBox">
+        <form className="loginstyle" onSubmit={handleSubmit}>
+          {error?.message && <p>{error.message}</p>}
+          <label> Username</label>
+          <input
+            className="TextInput"
+            label="Username"
+            variant="filled"
+            size="sm"
+            withAsterisk
+            value={username}
+            onChange={(event) => setUsername(event.target.value)}
+            required
+          />
+          <label>Password</label>
+          <input
+            className="PasswordInput"
+            label="Password"
+            type="password"
+            variant="filled"
+            size="xl"
+            withAsterisk
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            required
+          />
+          <div className="container">
+            <button
+              className="btn"
+              type="submit"
+              variant="light"
+              color="cyan"
+              size="md"
+              uppercase
+            >
+              Login
+            </button>
+          </div>
+        </form>
+      </div>
+      <div className="footer">
+        <Footer />
+      </div>
     </>
   );
 };

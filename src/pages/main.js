@@ -11,7 +11,7 @@ export default function App() {
   const [filteredData, setFilteredData] = useState(allData);
   const [search, setSearch] = useState(``);
 
-  const handleSearch = (e) => { };
+  const handleSearch = (e) => {};
   const { user, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -43,78 +43,85 @@ export default function App() {
 
   return (
     <div className="App">
-      <div style={{ margin: "0 auto", marginTop: "10%" }}>
+      <div 
+      // style={{ margin: "0 auto", marginTop: "10%" }}
+      >
         <Navbar />
         <label>Search:</label>
         <input
           type="text"
           onChange={(event) => setSearch(event.target.value)}
         />
-        {allData
-          .filter((item) => {
-            if (item.name.toLowerCase().includes(search.toLowerCase())) {
-              return item;
-            }
-            if (item.location.toLowerCase().includes(search.toLowerCase())) {
-              return item;
-            }
-            if (item.pricepernight === search) {
-              return item;
-            }
-            if (item.maxnumberofdays === search) {
-              return item;
-            }
-            if (item.rooms === search) {
-              return item;
-            }
-            if (item.type === search) {
-              return item;
-            }
-            if (item.animaltype === search) {
-              return item;
-            }
-            if (item.maxsizeofanimal === search) {
-              return item;
-            }
-            if (item.maxnumberofanimals === search) {
-              return item;
-            }
-            if (item.photo === search) {
-              return item;
-            }
-          })
-          .map((item, index) => (
-            <ul key={item._id}>
-              <li>{item.name}</li>
-              <li>Location: {item.location}</li>
-              <li>Price per night: {item.pricepernight}</li>
-              <li>Max numbers of days: {item.maxnumberofdays}</li>
-              <li>Rooms: {item.rooms}</li>
-              <li>Type: {item.type}</li>
-              <li>Animal Type: {item.animaltype}</li>
-              <li>Max size of animal: {item.maxsizeofanimal}</li>
-              <li>Max of number of animals: {item.maxnumberofanimals}</li>
-              <li>
-                <div className="housephoto">
-                  <img src={item.photo} alt="photo" />
-                </div>
-              </li>
-              <button
-                className="btn"
-                onClick={() => {
-                  handleAddHouse(item._id);
-                }}
-                type="button"
-                disabled={user.payload.userCopy.houses.some(
-                  (house) => house._id === item._id
-                )}
-              >
-                Rent
-              </button>
-            </ul>
-          ))}
+        <div className="houses">
+          {allData
+            .filter((item) => {
+              if (item.name.toLowerCase().includes(search.toLowerCase())) {
+                return item;
+              }
+              if (item.location.toLowerCase().includes(search.toLowerCase())) {
+                return item;
+              }
+              if (item.pricepernight === search) {
+                return item;
+              }
+              if (item.maxnumberofdays === search) {
+                return item;
+              }
+              if (item.rooms === search) {
+                return item;
+              }
+              if (item.type === search) {
+                return item;
+              }
+              if (item.animaltype === search) {
+                return item;
+              }
+              if (item.maxsizeofanimal === search) {
+                return item;
+              }
+              if (item.maxnumberofanimals === search) {
+                return item;
+              }
+              if (item.photo === search) {
+                return item;
+              }
+            })
+            .map((item, index) => (
+              <ul key={item._id} className="house">
+                <li className="name">{item.name}</li>
+                <li>
+                  <div className="housephoto">
+                    <img src={item.photo} alt="photo" />
+                  </div>
+                </li>
+                <li>Location: {item.location}</li>
+                <li>Price per night: {item.pricepernight}</li>
+                <li>Max numbers of days: {item.maxnumberofdays}</li>
+                <li>Rooms: {item.rooms}</li>
+                <li>Type: {item.type}</li>
+                <li>Animal Type: {item.animaltype}</li>
+                <li>Max size of animal: {item.maxsizeofanimal}</li>
+                <li>Max of number of animals: {item.maxnumberofanimals}</li>
+
+                <button
+                  className="btn"
+                  onClick={() => {
+                    handleAddHouse(item._id);
+                  }}
+                  type="button"
+                  disabled={user.payload.userCopy.houses.some(
+                    (house) => house._id === item._id
+                  )}
+                >
+                  Rent
+                </button>
+              </ul>
+            ))}
+        </div>
       </div>
-      <Footer />
+      <div className="footer">
+        <Footer />
+      </div>
     </div>
   );
 }

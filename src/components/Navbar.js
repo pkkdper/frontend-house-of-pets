@@ -36,10 +36,10 @@ function Navbar() {
                 Logout
               </button>
               {/* <p>{user.payload.userCopy.username}</p> */}
-              <img
+              {/* <img
                 src={user.payload.userCopy.picture}
                 className="imageProfileNav"
-              />
+              /> */}
             </div>
           </>
         )}

@@ -9,8 +9,8 @@
   font-size: 1.5rem;
   /* font-family: "monospace"; */
   font-family: ff-tisa-sans-web-pro, sans-serif;
-font-style: normal;
-font-weight: 400;
+  font-style: normal;
+  font-weight: 400;
   background-color: #fbf9fe;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='32' viewBox='0 0 16 32'%3E%3Cg fill='%23ffd9d9' fill-opacity='0.4'%3E%3Cpath fill-rule='evenodd' d='M0 24h4v2H0v-2zm0 4h6v2H0v-2zm0-8h2v2H0v-2zM0 0h4v2H0V0zm0 4h2v2H0V4zm16 20h-6v2h6v-2zm0 4H8v2h8v-2zm0-8h-4v2h4v-2zm0-20h-6v2h6V0zm0 4h-4v2h4V4zm-2 12h2v2h-2v-2zm0-8h2v2h-2V8zM2 8h10v2H2V8zm0 8h10v2H2v-2zm-2-4h14v2H0v-2zm4-8h6v2H4V4zm0 16h6v2H4v-2zM6 0h2v2H6V0zm0 24h2v2H6v-2z'/%3E%3C/g%3E%3C/svg%3E");
 }
@@ -53,28 +53,31 @@ font-weight: 400;
 }
 
 form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   border: none;
   padding: 0px;
   margin-bottom: 10px;
   margin-top: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
-.signupstyle{
-width: 400px;
+.signupstyle {
+  width: 400px;
 }
-.loginstyle{
-width: 400px
+.loginstyle {
+  width: 400px;
 }
 #addanimal {
-  width: 700px;  margin-left: 590px;
+  display: flex;
+  width: 700px;
+  margin-left: 590px;
   /* right: 800px; */
 }
 /* .addanimal {
 
 } */
+
 .form {
   display: flex;
   flex-direction: column;
@@ -99,15 +102,16 @@ width: 400px
 #picture {
   margin-left: 175px;
 }
+
 .formbox p {
-  width: 600px;
+  width: 700px;
 }
-#labelimg p{
+#labelimg p {
   margin-left: -50px;
 }
 select {
   margin-top: 20px;
-  display: inline-block;
+  display: inline-blockflex;
   border: 1px solid gray;
   border-radius: 4px;
   padding: 10px 30px 10px 20px;
@@ -163,7 +167,7 @@ select {
   padding: 3px;
   flex-direction: space-between;
   align-items: center;
-flex-wrap: wrap;
+  flex-wrap: wrap;
   color: rgb(65, 62, 62);
   font-size: 1rem;
   display: flex;
@@ -198,8 +202,8 @@ flex-wrap: wrap;
 .h4 {
   margin-left: 100px;
   margin-right: 100px;
-font-size: 30px;
-font-weight: 600;
+  font-size: 30px;
+  font-weight: 600;
   color: rgb(223, 76, 91);
   align-items: center;
   margin-top: 30px;
@@ -207,7 +211,7 @@ font-weight: 600;
   /* linear-gradient(
     50deg,
     rgb(232, 227, 229) 20%, */
-    /* rgb(114, 113, 113) 100% */
+  /* rgb(114, 113, 113) 100% */
   /* ); */
 }
 /* #labelimg{
@@ -237,25 +241,22 @@ font-weight: 600;
   margin-left: 30px;
 }
 
-/* .formBox {
-
-} */
-.rightSideNav p {
+*/ .rightSideNav p {
   margin-left: 20px;
 }
 .footer {
   background-color: rgba(0, 0, 0, 0.5);
   /* display: inline-block; */
-  margin-top: 100px
+  margin-top: 100px;
 }
 
 .houses {
   display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: baseline;
-	align-content: stretch;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: baseline;
+  align-content: stretch;
   justify-content: space-evenly;
 }
 .house {
@@ -281,28 +282,27 @@ font-weight: 600;
   margin-top: 20px;
   width: 100px;
   height: 50px;
-  font-size: 18px
+  font-size: 18px;
 }
 .name {
   font-weight: 600;
   font-size: 20px;
 }
 .navbar {
-
   display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: center;
-	align-items: baseline;
-	align-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: baseline;
+  align-content: center;
 }
 .logo {
-  margin: auto
+  margin: auto;
 }
 .rightSideNav {
-  display: flex; 
+  display: flex;
   align-items: center;
-} 
+}
 /* nav {
   display: flex;
 } */
@@ -314,11 +314,12 @@ font-weight: 600;
 
 } */
 form {
-  /* box-sizing: border-box; */
-  padding: 2rem;
+  padding: 3rem;
   background-color: hsl(0, 0%, 100%);
   display: flex;
-  /* grid-template-columns: 1fr 1fr; */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 .list {
@@ -330,9 +331,9 @@ form {
 }
 .list button {
   position: absolute;
-left: 400px;
-top: 100px;
+  left: 400px;
+  top: 100px;
 }
-input[type='file'] {
+input[type="file"] {
   color: transparent;
 }

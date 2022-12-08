@@ -3,7 +3,7 @@ import Navbar from "../components/Navbar";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { AuthContext } from "../contexts/auth.context";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 
 export default function App() {
@@ -37,15 +37,11 @@ export default function App() {
       `${process.env.REACT_APP_BACKEND_URL}/house/houses/renthouse/${id}/user/${user.payload.userCopy._id}`
     );
     updateUser();
-    // setIsDisabled(true)
-    // navigate("/auth/profile")
   };
 
   return (
     <div className="App">
-      <div
-      // style={{ margin: "0 auto", marginTop: "10%" }}
-      >
+      <div>
         <Navbar />
         <label>Search:</label>
         <input
@@ -125,14 +121,3 @@ export default function App() {
     </div>
   );
 }
-
-/* name: "Beautiful apartment",
-location: "Peru",
-pricepernight: 50,
-maxnumberofdays: 7,
-rooms: 3,
-type: "Apartment",
-animaltype: "Dog",
-maxsizeofanimal: "Big",
-maxnumberofanimals: 3,
-photo: "picture", */

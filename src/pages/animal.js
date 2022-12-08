@@ -4,24 +4,10 @@ import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
-import {
-  FormLabel,
-  InputLabel,
-  MenuItem,
-  Select,
-  GlobalStyles,
-} from "@mui/material";
-import { borderLeft } from "@mui/system";
-import { TextInput } from "@mantine/core";
 
-const animalSizes = [
-  "Small" ,
-  "Medium" ,
-  "Big" ,
-  "Giant" ,
-];
+const animalSizes = ["Small", "Medium", "Big", "Giant"];
 
 const Animal = (props) => {
   const { user, getToken, updateUser } = useContext(AuthContext);
@@ -50,7 +36,7 @@ const Animal = (props) => {
       },
       { headers: { Authorization: `Bearer ${token}` } }
     );
-    console.log(response)
+    console.log(response);
 
     const image = event.target.imageUrl.files[0];
     const formData = new FormData();
@@ -59,9 +45,6 @@ const Animal = (props) => {
       `${process.env.REACT_APP_BACKEND_URL}/animals/${response.data._id}/image`,
       {
         method: "PUT",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
         body: formData,
       }
     );
@@ -69,15 +52,7 @@ const Animal = (props) => {
     console.log(parsed);
     setPicture(parsed);
     updateUser();
-    // setShowanimal(event.target.value)
-    // updateUser();
-    // const parsed = response.data;
     navigate("/auth/profile");
-    // if (parsed.status === 200) {
-    //   setToken(parsed.token);
-    // } else {
-    //   setError(parsed);
-    // }
   };
 
   // function to update name of the animal
@@ -113,7 +88,7 @@ const Animal = (props) => {
   // function to update picture state of the animal
   const handlePictureChange = async (event) => {
     event.preventDefault();
-    console.log(user.payload.userCopy.animals)
+    console.log(user.payload.userCopy.animals);
     const id = user.payload.userCopy.animals._id;
     const image = event.target.imageUrl.files[0];
     const formData = new FormData();
@@ -122,9 +97,6 @@ const Animal = (props) => {
       `${process.env.REACT_APP_BACKEND_URL}/animal/${id}/image`,
       {
         method: "POST",
-        // headers: {
-        //   "Content-Type": "application/json",
-        // },
         body: formData,
       }
     );
@@ -133,7 +105,6 @@ const Animal = (props) => {
     setPicture(parsed);
     updateUser();
   };
-      // setPicture(event.target.value);
 
   return (
     <div className="animal">
@@ -143,56 +114,69 @@ const Animal = (props) => {
           <p>Create the profile of your pet:</p>
         </div>
         <div className="form addAnimal" id="addanimal">
-        <form onSubmit={handleSubmit}>
-          <div className="select-styling">
-            <label className="label">Name: </label>
-            <input type="text" value={name} onChange={handleChange}  className="input"/>
-
-            <label className="label">Type: </label>
-            <select
-              // labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={type}
-              label="Type"
-              size="small"
-              onChange={handleTypeChange}
-            >
-              <option value={"Cat"}>Cat</option>
-              <option value={"Dog"}>Dog</option>
-            </select>
+          <form onSubmit={handleSubmit}>
             <div className="select-styling">
-              <label className="label">Size: </label>
-              {/* <FormLabel id="demo-simple-select-label"></FormLabel> */}
+              <label className="label">Name: </label>
+              <input
+                type="text"
+                value={name}
+                onChange={handleChange}
+                className="input"
+              />
+
+              <label className="label">Type: </label>
               <select
-                // labelId="demo-simple-select-label"
                 id="demo-simple-select"
-                value={size}
-                label="Size"
+                value={type}
+                label="Type"
                 size="small"
-                onChange={handleSizeChange}
+                onChange={handleTypeChange}
               >
-                {animalSizes.map(size => <option key={size} value={size}>{size}</option>)}
+                <option value={"Cat"}>Cat</option>
+                <option value={"Dog"}>Dog</option>
               </select>
-            </div>
+              <div className="select-styling">
+                <label className="label">Size: </label>
 
-            <label className="label">Medical:</label>
-            <input type="text" value={medical} onChange={handleMedicalChange}  placeholder="Medical conditions"
-      label="Medical conditions" className="input"/>
-            <label className="label">Passport:</label>
-            <input className="input"
-              type="checkbox"
-              value={passport}
-              onChange={handlePassportChange}
+                <select
+                  id="demo-simple-select"
+                  value={size}
+                  label="Size"
+                  size="small"
+                  onChange={handleSizeChange}
+                >
+                  {animalSizes.map((size) => (
+                    <option key={size} value={size}>
+                      {size}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            />
-            <label className="label">Vaccines:</label>
-            <input className="input"
-              type="checkbox"
-              value={vaccines}
-              onChange={handleVaccinesChange}
-
-            />
-            {/* <label>Picture:</label>
+              <label className="label">Medical:</label>
+              <input
+                type="text"
+                value={medical}
+                onChange={handleMedicalChange}
+                placeholder="Medical conditions"
+                label="Medical conditions"
+                className="input"
+              />
+              <label className="label">Passport:</label>
+              <input
+                className="input"
+                type="checkbox"
+                value={passport}
+                onChange={handlePassportChange}
+              />
+              <label className="label">Vaccines:</label>
+              <input
+                className="input"
+                type="checkbox"
+                value={vaccines}
+                onChange={handleVaccinesChange}
+              />
+              {/* <label>Picture:</label>
             <input
               id="picture"
               type="file"
@@ -200,22 +184,29 @@ const Animal = (props) => {
               onChange={handlePictureChange}
             /> */}
 
-            {/* <input
+              {/* <input
               type="picture"
               value={picture}
               onChange={handlePictureChange}
             /> */}
-          </div>
-        {/* <form onSubmit={handlePictureChange}> */}
-        <label id="labelimg" className="label"><p>Choose a Picture: </p><input className="input"
-              id="picture"
-              type="file"
-              accept="image/png, image/jpg"
-              // value={picture}
-              name="imageUrl"
-            /></label>
-            <button type="submit" className="btn">Submit</button>
-        </form></div>
+            </div>
+            {/* <form onSubmit={handlePictureChange}> */}
+            <label id="labelimg" className="label">
+              <p>Choose a Picture: </p>
+              <input
+                className="input"
+                id="picture"
+                type="file"
+                accept="image/png, image/jpg"
+                // value={picture}
+                name="imageUrl"
+              />
+            </label>
+            <button type="submit" className="btn">
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
       <div className="footer">
         <Footer />

@@ -30,7 +30,7 @@ export default function App() {
   useEffect(() => {
     fetchHouses();
   }, []);
-  console.log("All data", allData);
+  // console.log("All data", allData);
 
   const handleAddHouse = async (id) => {
     await axios.get(

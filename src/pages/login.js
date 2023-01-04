@@ -61,7 +61,7 @@ const LoginPage = (props) => {
             label="Username"
             variant="filled"
             size="sm"
-            withAsterisk
+            withasterisk="true"
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             required
@@ -73,7 +73,7 @@ const LoginPage = (props) => {
             type="password"
             variant="filled"
             size="xl"
-            withAsterisk
+            withasterisk="true"
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             required
@@ -85,7 +85,7 @@ const LoginPage = (props) => {
               variant="light"
               color="cyan"
               size="md"
-              uppercase
+              uppercase="true"
             >
               Login
             </button>

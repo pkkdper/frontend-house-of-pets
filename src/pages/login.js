@@ -5,7 +5,6 @@ import { AuthContext } from "../contexts/auth.context";
 import axios from "axios";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-const API_URL = "http://localhost:5005/";
 const LoginPage = (props) => {
   const navigate = useNavigate();
   // const { storeToken } = useContext(AuthContext);

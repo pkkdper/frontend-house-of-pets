@@ -2,12 +2,12 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import axios from "axios";
 import { useEffect, useState, useContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../contexts/auth.context";
 import Footer from "../components/Footer";
 
 function Profile(props) {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { user, updateUser, isLoading, setUser } = useContext(AuthContext);
   const [changedUsername, setChangedUsername] = useState("");
   const [changedEmail, setChangedEmail] = useState("");
@@ -16,11 +16,11 @@ function Profile(props) {
   const [changedAge, setChangedAge] = useState(0);
   const [changedPicture, setChangedPicture] = useState("");
   const [changedLocation, setChangedLocation] = useState("");
-  const [file, setFile] = useState(null);
+  // const [file, setFile] = useState(null);
 
-  function handleChange(event) {
-    setFile(event.target.files[0]);
-  }
+  // function handleChange(event) {
+  //   setFile(event.target.files[0]);
+  // }
   useEffect(() => {
     if (!isLoading && user) {
       setChangedUsername(user.payload.userCopy.username);
@@ -36,7 +36,6 @@ function Profile(props) {
   const handleSubmitPicture = async (event) => {
     event.preventDefault();
     const id = user.payload.userCopy._id;
-    // const userInfo = user.payload.userCopy;
     const image = event.target.imageUrl.files[0];
     const formData = new FormData();
     formData.append("imageUrl", image);
@@ -66,7 +65,7 @@ function Profile(props) {
     const id = user.payload.userCopy._id;
     // const userInfo = user.payload.userCopy;
     // const image = event.target.imageUrl.files[0];
-    const formData = new FormData();
+    // const formData = new FormData();
     // formData.append("imageUrl", image);
     // formData.append("name", changedName);
     // formData.append("email", changedEmail);
@@ -120,8 +119,8 @@ function Profile(props) {
         }),
       }
     );
-    const parsed = result.json();
-    updateUser();
+    // const parsed = result.json();
+    // updateUser();
   };
   const handleDeleteAnimal = async (animalid) => {
     const id = user.payload.userCopy._id;

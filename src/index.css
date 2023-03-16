@@ -44,8 +44,10 @@ img {
 .text {
   position: absolute;
   top: 60px;
-  left: 400px;
   background-color: rgb(246, 209, 209);
+  width: 100%; 
+  left: 0px;
+  text-align: center;
 }
 
 /* .form {
